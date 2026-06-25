@@ -1,4 +1,7 @@
+@import "tailwindcss";
+
 :root {
+    --spacing: 4px;
     --color-primary: #FFFFFF;
     --color-active: #DCE4E9;
     --color-outline: #AABACC;

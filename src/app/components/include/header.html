@@ -1,13 +1,13 @@
-<header class="d-flex justify-space">
+<header class="flex justify-between">
     <h2>SURF.RU</h2>
 
     @if (auth.isAuthenticated()) {
-        <div class="d-flex">
+        <div class="flex gap-3">
             <h3>Мой профиль</h3>
             <h3>Выйти</h3>
         </div>
     } @else {
-        <div class="d-flex">
+        <div class="flex gap-3">
             <h3>Войти</h3>
             <h3>Зарегистрироваться</h3>
         </div>
