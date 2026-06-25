@@ -1,0 +1,15 @@
+<header class="d-flex justify-space">
+    <h2>SURF.RU</h2>
+
+    @if (auth.isAuthenticated()) {
+        <div class="d-flex">
+            <h3>Мой профиль</h3>
+            <h3>Выйти</h3>
+        </div>
+    } @else {
+        <div class="d-flex">
+            <h3>Войти</h3>
+            <h3>Зарегистрироваться</h3>
+        </div>
+    }
+</header>
