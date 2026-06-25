@@ -1,0 +1,83 @@
+:root {
+    --color-primary: #FFFFFF;
+    --color-active: #DCE4E9;
+    --color-outline: #AABACC;
+    --color-text-active: #818283;
+    --size-tiny: 5px;
+    --size-small: 9px;
+    --size-normal: 12px;
+    --size-mid: 16px;
+    --size-big: 24px;
+    --size-huge: 64px;
+}
+
+button {
+    border: none;
+    outline: none;
+
+    background-color: var(--color-active);
+
+    outline: 1px solid var(--color-outline);
+    outline-offset: -1px;
+
+    padding: var(--size-small);
+    color: var(--color-text-active);
+
+    font-size: 0.875rem;
+    font-weight: bolder;
+
+    height: fit-content;
+
+}
+
+html {
+    font-family: "Montserrat";
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+header {
+    background-color: #C7D2D9;
+    padding: var(--size-small) var(--size-normal);
+}
+
+main {
+    justify-content: center;
+    padding: var(--size-big) var(--size-huge);
+}
+
+.outline {
+    outline: 1px solid var(--color-outline);
+    outline-offset: -1px;
+}
+
+/* .d-flex {
+    display: flex;
+} */
+
+.direction-column {
+    flex-direction: column;
+}
+.justify-space {
+    justify-content: space-between;
+}
+
+.form-modal {
+    flex-direction: column;
+}
+.form-modal-header {
+    justify-content: start;
+    background-color: var(--color-active);
+    padding: var(--size-small);
+}
+.form-modal-content {
+    flex-direction: column;
+    background-color: var(--color-primary);
+    padding: var(--size-small);
+}
+.form-modal-content .bottom-section {
+    align-items: end;
+}
