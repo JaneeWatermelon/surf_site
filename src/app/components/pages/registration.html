@@ -42,7 +42,7 @@
             label="Имя">
         </form-input-with-label>
 
-    </div>
+      </div>  
       <div class="w-full h-fit rounded-[4px] overflow-hidden outline">
         <img src="assets/images/default_post_image.jpg">
       </div>
@@ -50,7 +50,7 @@
 
     <form-file-input
       label="Выберите фото">
-  </form-file-input>
+    </form-file-input>
 
     <form-input-with-label
         form-content
@@ -72,6 +72,7 @@
         form-content
         [(model)]="registration_data.achievements"
         label="Достижения"
+        [maxLength]="200"
         [multiline]="true"
         [rows]="2">
     </form-input-with-label>

@@ -9,12 +9,14 @@
     </div>
     <div form-content class="flex justify-between items-end">
       <form-file-input form-content></form-file-input>
-      <button>Добавить</button>
+      <button (click)="savePost()">Добавить</button>
     </div>
 
   </form-modal>
 
-  @for (item of [1,2]; track $index) {
+  <button (click)="getPosts()">Получить посты</button>
+
+  @for (item of posts; track $index) {
     <form-modal class="max-w-200">
   
       <div form-header class="flex items-center gap-2">
@@ -22,14 +24,14 @@
           <img src="assets/images/default_avatar.jpg">
         </div>
         <div class="d-flex direction-column">
-          <p>Enotovod</p>
-          <h5>13.06.2019 в 20:15</h5>
+          <p>{{item.author}}</p>
+          <h5>{{item.created}}</h5>
         </div>
       </div>
   
       <div form-content class="flex flex-col gap-2">
-        <p>Sample text Sample text Sample text Sample text Sample text. Sample text Sample text Sample text, Sample text Sample text Sample text Sample text Sample text - Sample text Sample text Sample text. Sample text!!</p>
-        <img src="assets/images/default_post_image.jpg">
+        <p>{{item.text}}</p>
+        <img src="{{item.file_path}}">
       </div>
   
     </form-modal>

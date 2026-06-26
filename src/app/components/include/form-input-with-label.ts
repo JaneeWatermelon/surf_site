@@ -16,6 +16,7 @@ export class FormInputWithLabelComponent {
 
   model = model<string>('');
 
+  @Input() field = '';
   @Input() label = '';
   @Input() placeholder = '';
   @Input() type = 'text';
