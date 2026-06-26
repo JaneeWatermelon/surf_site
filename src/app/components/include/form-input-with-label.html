@@ -1,0 +1,78 @@
+<div class="flex flex-col gap-1">
+
+    <div class="flex justify-between items-center">
+        <p class="text-writing">{{ label }}</p>
+
+        @if (labelIcon === 'refresh') {
+            <img src="assets/icons/refresh.svg" class="h-4 cursor-pointer">
+        }
+
+        @if (labelIcon === 'eye') {
+            <img src="assets/icons/eye.svg" class="h-4 cursor-pointer">
+        }
+    </div>
+
+    <div class="flex flex-col">
+
+        <div class="input-wrapper flex items-center gap-2 p-2 pl-3 pr-3 rounded-[4px] outline">
+
+            @if (leftIcon === 'email') {
+                <img src="assets/icons/email.svg" class="h-4">
+            }
+
+            @if (!multiline) {
+
+                <input
+                    #inp="ngModel"
+                    [ngModel]="model()"
+                    (ngModelChange)="model.set($event)"
+                    [type]="type"
+                    [placeholder]="placeholder"
+                    [required]="required"
+                    [maxLength]="maxLength"
+                    class="w-full">
+
+                <div class="flex justify-between">
+                    @for (error of inp.errors | keyvalue; track error.key) {
+                        <h5 class="text-error">{{ error.key }}</h5>
+                    }
+                </div>
+
+            } @else {
+
+                <textarea
+                    #inp="ngModel"
+                    [ngModel]="model()"
+                    (ngModelChange)="model.set($event)"
+                    [rows]="rows"
+                    [required]="required"
+                    [maxLength]="maxLength"
+                    [placeholder]="placeholder"
+                    class="w-full resize-none outline-none">
+                </textarea>
+
+                <div class="flex justify-between">
+                    @for (error of inp.errors | keyvalue; track error.key) {
+                        <h5 class="text-error">{{ error.key }}</h5>
+                    }
+                </div>
+            }
+
+            @if (rightIcon === 'clear') {
+                <img
+                    src="assets/icons/close.svg"
+                    class="h-4 cursor-pointer"
+                    (click)="clear()">
+            }
+
+        </div>
+
+        <!-- <div class="flex justify-between">
+            @for (error of inp.errors; track error.key) {
+                <h5 class="text-error">{{ error.key }}</h5>
+            }
+        </div> -->
+
+    </div>
+
+</div>

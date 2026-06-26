@@ -2,16 +2,19 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
+import { FormInputWithLabelComponent } from '../include/form-input-with-label';
+import { FormFileInputComponent } from '../include/form-file-input';
+import { RegistrationData } from '../../models/registration_data';
 
 /**
  * Главная страница
  */
 @Component({
   selector: 'registration',
-  imports: [...SHARED_IMPORTS, FormModalComponent],
+  imports: [...SHARED_IMPORTS, FormModalComponent, FormInputWithLabelComponent, FormFileInputComponent],
   templateUrl: './registration.html',
 //   styleUrl: './app.css'
 })
 export class Registration {
-//   protected readonly title = signal('surf');
+  registration_data: RegistrationData = new RegistrationData();
 }

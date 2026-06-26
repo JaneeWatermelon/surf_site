@@ -5,16 +5,10 @@
 
     <div form-content>
       <p>Введите текст</p>
-      <textarea></textarea>
+      <textarea name="text" [(ngModel)]="post_add_data.text"></textarea>
     </div>
     <div form-content class="flex justify-between items-end">
-      <div>
-        <p>Прикрепить изображение</p>
-        <div>
-          <input type="file">
-          <button>Обзор...</button>
-        </div>
-      </div>
+      <form-file-input form-content></form-file-input>
       <button>Добавить</button>
     </div>
 

@@ -1,13 +1,24 @@
 @import "tailwindcss";
 
-:root {
-    --spacing: 4px;
-
+@theme {
     --color-primary: #FFFFFF;
     --color-active: #DCE4E9;
     --color-outline: #AABACC;
     --color-text-active: #818283;
+    --color-writing: #6C757D;
+    --color-error: #EC2E2E;
+}
 
+:root {
+    --spacing: 4px;
+    
+    --color-primary: #FFFFFF;
+    --color-active: #DCE4E9;
+    --color-outline: #AABACC;
+    --color-text-active: #818283;
+    --color-writing: #6C757D;
+    --color-error: #EC2E2E;
+    
     --size-tiny: 5px;
     --size-small: 9px;
     --size-normal: 12px;
@@ -33,6 +44,11 @@ button {
 
     height: fit-content;
 
+}
+
+input, textarea {
+    outline: none;
+    border: none;
 }
 
 html {

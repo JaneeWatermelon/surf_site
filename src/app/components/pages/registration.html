@@ -1,43 +1,85 @@
-<main class="flex flex-col gap-6 p-6 pl-16 pr-16 justify-center">
-  <form-modal class="max-w-200">
+<main class="flex flex-col items-center gap-6 p-6 pl-16 pr-16 justify-center">
+  <form-modal class="max-w-300 gap-6 p-16 pt-6 pb-6">
 
-    <h4 form-header>Добавление новой записи</h4>
+    <h4 form-header>Регистрация нового пользователя</h4>
+    
+    <div form-content class="flex gap-6">
+      <div class="flex flex-col gap-3 w-full">
 
-    <div form-content>
-      <p>Введите текст</p>
-      <textarea></textarea>
+        <form-input-with-label
+            [(model)]="registration_data.nickname"
+            label="Псевдоним*"
+            labelIcon="refresh">
+        </form-input-with-label>
+
+        <form-input-with-label
+            [(model)]="registration_data.email"
+            label="Почта*"
+            leftIcon="email"
+            type="email">
+        </form-input-with-label>
+
+        <form-input-with-label
+            [(model)]="registration_data.password"
+            label="Пароль*"
+            labelIcon="eye"
+            type="password">
+        </form-input-with-label>
+
+        <form-input-with-label
+            [(model)]="registration_data.password_repeat"
+            label="Подтвердите пароль*"
+            type="password">
+        </form-input-with-label>
+
+        <form-input-with-label
+            [(model)]="registration_data.last_name"
+            label="Фамилия">
+        </form-input-with-label>
+
+        <form-input-with-label
+            [(model)]="registration_data.first_name"
+            label="Имя">
+        </form-input-with-label>
+
     </div>
-    <div form-content class="flex justify-between items-end">
-      <div>
-        <p>Прикрепить изображение</p>
-        <div>
-          <input type="file">
-          <button>Обзор...</button>
-        </div>
+      <div class="w-full h-fit rounded-[4px] overflow-hidden outline">
+        <img src="assets/images/default_post_image.jpg">
       </div>
-      <!-- <button (click)="onClick()">Добавить</button> -->
+    </div>
+
+    <form-file-input
+      label="Выберите фото">
+  </form-file-input>
+
+    <form-input-with-label
+        form-content
+        [(model)]="registration_data.contacts"
+        label="Контактная информация"
+        [multiline]="true"
+        [rows]="2">
+    </form-input-with-label>
+
+    <form-input-with-label
+        form-content
+        [(model)]="registration_data.about"
+        label="О себе"
+        [multiline]="true"
+        [rows]="2">
+    </form-input-with-label>
+
+    <form-input-with-label
+        form-content
+        [(model)]="registration_data.achievements"
+        label="Достижения"
+        [multiline]="true"
+        [rows]="2">
+    </form-input-with-label>
+
+    <div form-content class="flex justify-between items-end">
+      <p class="text-writing">* - поля, обязательные для заполнения</p>
+      <button>Зарегистрироваться</button>
     </div>
 
   </form-modal>
-
-  @for (item of [1,2]; track $index) {
-    <form-modal class="max-w-200">
-  
-      <div form-header class="flex items-center gap-2">
-        <div class="rounded-[50px] overflow-hidden">
-          <img src="assets/images/default_avatar.jpg">
-        </div>
-        <div class="d-flex direction-column">
-          <p>Enotovod</p>
-          <h5>13.06.2019 в 20:15</h5>
-        </div>
-      </div>
-  
-      <div form-content class="flex flex-col gap-2">
-        <p>Sample text Sample text Sample text Sample text Sample text. Sample text Sample text Sample text, Sample text Sample text Sample text Sample text Sample text - Sample text Sample text Sample text. Sample text!!</p>
-        <img src="assets/images/default_post_image.jpg">
-      </div>
-  
-    </form-modal>
-  }
 </main>

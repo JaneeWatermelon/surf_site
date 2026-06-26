@@ -1,0 +1,7 @@
+@if (errors) {
+    <div class="flex justify-between">
+        @for (error of errors | keyvalue; track error.key) {
+            <h5 class="text-error">{{ error.key }}</h5>
+        }
+    </div>
+}
