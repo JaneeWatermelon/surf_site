@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MainPage } from "./components/pages/main-page";
-import { Registration } from './components/pages/registration';
+import { HeaderComponent } from './components/include/header';
+import { SHARED_IMPORTS } from './shared-imports';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ...SHARED_IMPORTS, HeaderComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

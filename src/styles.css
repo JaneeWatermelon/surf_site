@@ -2,10 +2,12 @@
 
 :root {
     --spacing: 4px;
+
     --color-primary: #FFFFFF;
     --color-active: #DCE4E9;
     --color-outline: #AABACC;
     --color-text-active: #818283;
+
     --size-tiny: 5px;
     --size-small: 9px;
     --size-normal: 12px;
@@ -44,12 +46,6 @@ html, body {
 
 header {
     background-color: #C7D2D9;
-    padding: var(--size-small) var(--size-normal);
-}
-
-main {
-    justify-content: center;
-    padding: var(--size-big) var(--size-huge);
 }
 
 .outline {
@@ -57,30 +53,16 @@ main {
     outline-offset: -1px;
 }
 
-/* .d-flex {
-    display: flex;
-} */
-
-.direction-column {
-    flex-direction: column;
-}
-.justify-space {
-    justify-content: space-between;
-}
-
-.form-modal {
-    flex-direction: column;
-}
 .form-modal-header {
     justify-content: start;
     background-color: var(--color-active);
-    padding: var(--size-small);
 }
 .form-modal-content {
-    flex-direction: column;
     background-color: var(--color-primary);
-    padding: var(--size-small);
 }
-.form-modal-content .bottom-section {
-    align-items: end;
+
+.line-ver {
+    height: 100%;
+    width: 1px;
+    background-color: var(--color-outline);
 }

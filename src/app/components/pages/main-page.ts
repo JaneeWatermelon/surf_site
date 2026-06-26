@@ -9,18 +9,11 @@ import { HeaderComponent } from '../include/header';
  */
 @Component({
   selector: 'main-page',
-  imports: [...SHARED_IMPORTS, FormModalComponent, HeaderComponent],
+  imports: [...SHARED_IMPORTS, FormModalComponent],
   templateUrl: './main-page.html',
   standalone: true,
 //   styleUrl: './app.css'
 })
 export class MainPage {
 
-    constructor(private router: Router) {
-
-    }
-
-    onClick() {
-        this.router.navigate(["registration"]);
-    }
 }

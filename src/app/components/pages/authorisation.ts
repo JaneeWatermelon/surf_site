@@ -7,11 +7,11 @@ import { FormModalComponent } from '../include/form-modal';
  * Главная страница
  */
 @Component({
-  selector: 'registration',
+  selector: 'authorisation',
   imports: [...SHARED_IMPORTS, FormModalComponent],
-  templateUrl: './registration.html',
+  templateUrl: './authorisation.html',
 //   styleUrl: './app.css'
 })
-export class Registration {
+export class Authorisation {
 //   protected readonly title = signal('surf');
 }

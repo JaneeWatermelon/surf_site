@@ -1,12 +1,10 @@
-<div class="form-modal d-flex outline">
-    <div class="form-modal-header d-flex outline">
+<div class="form-modal flex flex-col outline">
+    <div class="form-modal-header flex outline p-2">
         <ng-content select="[form-header]"></ng-content>
-        <!-- <h4>{{ title }}</h4> -->
     </div>
 
-    <div class="form-modal-content d-flex">
+    <div class="form-modal-content flex flex-col p-2">
 
-        <!-- Здесь будет содержимое формы -->
         <ng-content select="[form-content]"></ng-content>
 
     </div>

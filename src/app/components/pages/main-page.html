@@ -1,5 +1,4 @@
-<app-header></app-header>
-<main class="flex flex-col gap-6">
+<main class="flex flex-col gap-6 p-6 pl-16 pr-16 justify-center">
   <form-modal class="max-w-200">
 
     <h4 form-header>Добавление новой записи</h4>
@@ -8,7 +7,7 @@
       <p>Введите текст</p>
       <textarea></textarea>
     </div>
-    <div form-content class="bottom-section d-flex justify-space">
+    <div form-content class="flex justify-between items-end">
       <div>
         <p>Прикрепить изображение</p>
         <div>
@@ -16,27 +15,29 @@
           <button>Обзор...</button>
         </div>
       </div>
-      <button (click)="onClick()">Добавить</button>
+      <button>Добавить</button>
     </div>
 
   </form-modal>
 
-  <form-modal class="max-w-200">
-
-    <div form-header class="flex items-center gap-2">
-      <div>
-        <img src="assets/images/default_avatar.jpg">
+  @for (item of [1,2]; track $index) {
+    <form-modal class="max-w-200">
+  
+      <div form-header class="flex items-center gap-2">
+        <div class="rounded-[50px] overflow-hidden">
+          <img src="assets/images/default_avatar.jpg">
+        </div>
+        <div class="d-flex direction-column">
+          <p>Enotovod</p>
+          <h5>13.06.2019 в 20:15</h5>
+        </div>
       </div>
-      <div class="d-flex direction-column">
-        <p>Enotovod</p>
-        <h5>13.06.2019 в 20:15</h5>
+  
+      <div form-content class="flex flex-col gap-2">
+        <p>Sample text Sample text Sample text Sample text Sample text. Sample text Sample text Sample text, Sample text Sample text Sample text Sample text Sample text - Sample text Sample text Sample text. Sample text!!</p>
+        <img src="assets/images/default_post_image.jpg">
       </div>
-    </div>
-
-    <div form-content>
-      <p>Sample text Sample text Sample text Sample text Sample text. Sample text Sample text Sample text, Sample text Sample text Sample text Sample text Sample text - Sample text Sample text Sample text. Sample text!!</p>
-      <img src="assets/images/default_post_image.jpg">
-    </div>
-
-  </form-modal>
+  
+    </form-modal>
+  }
 </main>
