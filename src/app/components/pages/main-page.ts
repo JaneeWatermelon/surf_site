@@ -7,13 +7,14 @@ import { Post_add_data } from '../../models/post_add_data';
 import { FormFileInputComponent } from '../include/form-file-input';
 import { MainPageApiService } from '../../services/main-page-api-service';
 import { first } from 'rxjs';
+import { FormInputWithLabelComponent } from '../include/form-input-with-label';
 
 /**
  * Главная страница
  */
 @Component({
   selector: 'main-page',
-  imports: [...SHARED_IMPORTS, FormModalComponent, FormFileInputComponent],
+  imports: [...SHARED_IMPORTS, FormModalComponent, FormFileInputComponent, FormInputWithLabelComponent],
   templateUrl: './main-page.html',
   standalone: true,
   providers: [MainPageApiService]

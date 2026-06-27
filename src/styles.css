@@ -27,6 +27,14 @@
     --size-huge: 64px;
 }
 
+@font-face {
+    font-family: 'FasterOne';
+    src: url('./assets/fonts/FasterOne-Regular.ttf');
+    /* font-weight: 400;
+    font-style: normal;
+    font-display: swap; */
+}
+
 button {
     border: none;
     outline: none;
@@ -62,6 +70,9 @@ html, body {
 
 header {
     background-color: #C7D2D9;
+}
+header h2 {
+    font-family: 'FasterOne';
 }
 
 .outline {

@@ -1,13 +1,13 @@
-<header class="flex justify-between p-2 pl-3 pr-3">
-    <h2 (click)="navHome()">SURF.RU</h2>
+<header class="flex justify-between items-center p-2 pl-3 pr-3">
+    <h2 (click)="navHome()" class="text-[36px]/9 text-primary">SURF.RU</h2>
 
     @if (auth.isAuthenticated()) {
-        <div class="flex gap-3">
+        <div class="flex gap-3 items-center">
             <h3>Мой профиль</h3>
             <h3>Выйти</h3>
         </div>
     } @else {
-        <div class="flex gap-3">
+        <div class="flex gap-3 items-center h-full">
             <span class="line-ver"></span>
             <h3 (click)="navAuthorisation()">Войти</h3>
             <span class="line-ver"></span>

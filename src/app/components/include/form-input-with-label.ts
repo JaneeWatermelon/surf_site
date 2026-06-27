@@ -4,7 +4,7 @@ import { FormInputErrorsComponent } from './form-input-errors';
 import { KeyValuePipe } from '@angular/common';
 import { FormInputComponent } from './form-input';
 
-type LabelIcon = 'refresh' | 'eye' | null;
+type LabelIcon = 'refresh' | 'eye-show' | 'eye-off' | null;
 type LeftIcon = 'email' | null;
 type RightIcon = 'clear' | null;
 
@@ -23,7 +23,7 @@ export class FormInputWithLabelComponent {
   
   @Input() labelIcon: LabelIcon = null;
   @Input() leftIcon: LeftIcon = null;
-  @Input() rightIcon: RightIcon = null;
+  @Input() rightIcon: RightIcon = 'clear';
   
   // Переменные input компоненты
   model = model<string>('');

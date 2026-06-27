@@ -5,7 +5,8 @@ import { Component, Input } from '@angular/core';
   templateUrl: './form-modal.html',
 })
 export class FormModalComponent {
-  // @Input() title = 'Название формы';
+  @Input() headerClass = '';
+  @Input() contentClass = '';
 
   onClick() {
     console.log('submit');

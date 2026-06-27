@@ -1,16 +1,25 @@
 <main class="flex flex-col gap-6 p-6 pl-16 pr-16 justify-center">
-  <form-modal class="max-w-200">
+  <form-modal class="max-w-200" contentClass="gap-3">
 
     <h4 form-header>Добавление новой записи</h4>
 
-    <div form-content>
-      <p>Введите текст</p>
-      <textarea name="text" [(ngModel)]="post_add_data.text"></textarea>
-    </div>
+    <form-input-with-label
+        form-content
+        [(model)]="post_add_data.text"
+        label="Введите текст"
+        [maxLength]="255"
+        [multiline]="true"
+        [rows]="4">
+    </form-input-with-label>
+
     <div form-content class="flex justify-between items-end">
-      <form-file-input form-content></form-file-input>
-      <button (click)="savePost()">Добавить</button>
+      <form-file-input
+        form-content
+        label="Прикрепить изображение">
+      </form-file-input>
+      <button (click)="savePost()" class="pl-6 pr-6">Добавить</button>
     </div>
+    
 
   </form-modal>
 

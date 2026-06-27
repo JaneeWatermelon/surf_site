@@ -1,9 +1,9 @@
 <div class="form-modal flex flex-col outline">
-    <div class="form-modal-header flex outline p-2">
+    <div class="form-modal-header flex outline p-2" [class]="headerClass">
         <ng-content select="[form-header]"></ng-content>
     </div>
 
-    <form class="form-modal-content flex flex-col p-2">
+    <form class="form-modal-content flex flex-col p-2" [class]="contentClass">
 
         <ng-content select="[form-content]"></ng-content>
 

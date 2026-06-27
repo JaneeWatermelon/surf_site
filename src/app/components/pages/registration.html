@@ -1,5 +1,5 @@
 <main class="flex flex-col items-center gap-6 p-6 pl-16 pr-16 justify-center">
-  <form-modal class="max-w-300 gap-6 p-16 pt-6 pb-6">
+  <form-modal class="max-w-300 gap-6" contentClass="p-16 pt-6 pb-6 gap-3">
 
     <h4 form-header>Регистрация нового пользователя</h4>
     
@@ -9,7 +9,7 @@
         <form-input-with-label
             [(model)]="registration_data.nickname"
             label="Псевдоним*"
-            labelIcon="refresh"
+            /* labelIcon="refresh" */
             [maxLength]="20"
             pattern="[a-zA-Zа-яА-Я0-9_]+"
             patternErrorText="Латиница, кириллица, цифры и подчёркивания">
@@ -18,7 +18,7 @@
         <form-input-with-label
             [(model)]="registration_data.email"
             label="Почта*"
-            leftIcon="email"
+            /* leftIcon="email" */
             [maxLength]="31"
             type="email"
             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
@@ -28,16 +28,17 @@
         <form-input-with-label
             [(model)]="registration_data.password"
             label="Пароль*"
-            labelIcon="eye"
+            labelIcon="eye-off"
             [maxLength]="20"
             pattern="[a-zA-Z0-9_]+"
             patternErrorText="Латиница, цифры и подчёркивания"
             type="password">
         </form-input-with-label>
-
+        
         <form-input-with-label
             [(model)]="registration_data.password_repeat"
             label="Подтвердите пароль*"
+            labelIcon="eye-off"
             [maxLength]="20"
             pattern="[a-zA-Z0-9_]+"
             patternErrorText="Латиница, цифры и подчёркивания"
@@ -63,6 +64,7 @@
     </div>
 
     <form-file-input
+      form-content
       label="Выберите фото">
     </form-file-input>
 
@@ -93,7 +95,7 @@
         [rows]="2">
     </form-input-with-label>
 
-    <div form-content class="flex justify-between items-end">
+    <div form-content class="flex justify-between items-start">
       <p class="text-writing">* - поля, обязательные для заполнения</p>
       <button>Зарегистрироваться</button>
     </div>
