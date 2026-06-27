@@ -1,7 +1,11 @@
 @if (errors) {
-    <div class="flex justify-between">
+    <div class="flex flex-col">
         @for (error of errors | keyvalue; track error.key) {
-            <h5 class="text-error">{{ error.key }}</h5>
+            @if (error.key == 'pattern') {
+            <h5 class="text-error">
+                {{ patternErrorText || getErrorMessage(error.key, error.value) }}
+            </h5>
+            }
         }
     </div>
 }

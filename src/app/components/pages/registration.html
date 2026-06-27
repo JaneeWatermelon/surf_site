@@ -9,36 +9,50 @@
         <form-input-with-label
             [(model)]="registration_data.nickname"
             label="Псевдоним*"
-            labelIcon="refresh">
+            labelIcon="refresh"
+            [maxLength]="20"
+            pattern="[a-zA-Zа-яА-Я0-9_]+"
+            patternErrorText="Латиница, кириллица, цифры и подчёркивания">
         </form-input-with-label>
 
         <form-input-with-label
             [(model)]="registration_data.email"
             label="Почта*"
             leftIcon="email"
-            type="email">
+            [maxLength]="31"
+            type="email"
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            patternErrorText="Неверный формат почты, пример (example@ex.ru)">
         </form-input-with-label>
 
         <form-input-with-label
             [(model)]="registration_data.password"
             label="Пароль*"
             labelIcon="eye"
+            [maxLength]="20"
+            pattern="[a-zA-Z0-9_]+"
+            patternErrorText="Латиница, цифры и подчёркивания"
             type="password">
         </form-input-with-label>
 
         <form-input-with-label
             [(model)]="registration_data.password_repeat"
             label="Подтвердите пароль*"
+            [maxLength]="20"
+            pattern="[a-zA-Z0-9_]+"
+            patternErrorText="Латиница, цифры и подчёркивания"
             type="password">
         </form-input-with-label>
 
         <form-input-with-label
             [(model)]="registration_data.last_name"
+            [maxLength]="31"
             label="Фамилия">
         </form-input-with-label>
 
         <form-input-with-label
             [(model)]="registration_data.first_name"
+            [maxLength]="31"
             label="Имя">
         </form-input-with-label>
 
@@ -56,6 +70,7 @@
         form-content
         [(model)]="registration_data.contacts"
         label="Контактная информация"
+        [maxLength]="255"
         [multiline]="true"
         [rows]="2">
     </form-input-with-label>
@@ -64,6 +79,7 @@
         form-content
         [(model)]="registration_data.about"
         label="О себе"
+        [maxLength]="255"
         [multiline]="true"
         [rows]="2">
     </form-input-with-label>
@@ -72,7 +88,7 @@
         form-content
         [(model)]="registration_data.achievements"
         label="Достижения"
-        [maxLength]="200"
+        [maxLength]="255"
         [multiline]="true"
         [rows]="2">
     </form-input-with-label>
