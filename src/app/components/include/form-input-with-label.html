@@ -20,44 +20,17 @@
                 <img src="assets/icons/email.svg" class="h-4">
             }
 
-            @if (!multiline) {
-
-                <input
-                    #inp="ngModel"
-                    [(ngModel)]="model"
-                    (ngModelChange)="model.set($event)"
-                    [type]="type"
-                    [placeholder]="placeholder"
-                    [required]="required"
-                    [maxLength]="maxLength || 16"
-                    pattern="\d*"
-                    class="w-full">
-
-                <div class="flex justify-between">
-                    @for (error of inp.errors | keyvalue; track error.key) {
-                        <h5 class="text-error">{{ error.key }}</h5>
-                    }
-                </div>
-
-            } @else {
-
-                <textarea
-                    #inp="ngModel"
-                    [(ngModel)]="model"
-                    (ngModelChange)="model.set($event)"
-                    [rows]="rows"
-                    [required]="required"
-                    [maxLength]="maxLength  || 16"
-                    [placeholder]="placeholder"
-                    class="w-full resize-none outline-none">
-                </textarea>
-
-                <div class="flex justify-between">
-                    @for (error of inp.errors | keyvalue; track error.key) {
-                        <h5 class="text-error">{{ error.key }}</h5>
-                    }
-                </div>
-            }
+            <form-input 
+                #inp="ngModel"
+                [(ngModel)]="model"
+                [multiline]="multiline"
+                [rows]="rows"
+                [type]="type"
+                [placeholder]="placeholder"
+                [required]="required"
+                [maxLength]="maxLength || 16"
+                [pattern]="pattern"
+            ></form-input>
 
             @if (rightIcon === 'clear') {
                 <img
