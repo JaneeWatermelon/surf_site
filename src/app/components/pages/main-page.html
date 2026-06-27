@@ -24,14 +24,14 @@
           <img src="assets/images/default_avatar.jpg">
         </div>
         <div class="d-flex direction-column">
-          <p>{{item.author}}</p>
-          <h5>{{item.created}}</h5>
+          <p>{{item.post.author.login}}</p>
+          <h5>{{item.post.created}}</h5>
         </div>
       </div>
   
       <div form-content class="flex flex-col gap-2">
-        <p>{{item.text}}</p>
-        <img src="{{item.file_path}}">
+        <p>{{item.post.text}}</p>
+        <img src="{{item.imageShip.image.code}}">
       </div>
   
     </form-modal>
