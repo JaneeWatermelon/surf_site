@@ -7,7 +7,7 @@ import { SHARED_IMPORTS } from './shared-imports';
   selector: 'app-root',
   imports: [RouterOutlet, ...SHARED_IMPORTS, HeaderComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('surf');

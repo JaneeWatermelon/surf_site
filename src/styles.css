@@ -44,7 +44,7 @@ button {
     outline: 1px solid var(--color-outline);
     outline-offset: -1px;
 
-    padding: var(--size-small);
+    padding: var(--size-small) var(--size-normal);
     color: var(--color-text-active);
 
     font-size: 0.875rem;
