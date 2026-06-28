@@ -1,8 +1,6 @@
-import { Component, Input, model, ViewChild } from '@angular/core';
+import { Component, Input, model, signal, ViewChild } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { FormInputErrorsComponent } from './form-input-errors';
-import { KeyValuePipe } from '@angular/common';
-import { FormInputComponent } from './form-input';
 
 type LabelIcon = 'refresh' | 'eye-show' | 'eye-off' | null;
 type LeftIcon = 'email' | null;
@@ -11,7 +9,7 @@ type RightIcon = 'clear' | null;
 @Component({
   selector: 'form-input-with-label',
   templateUrl: './form-input-with-label.html',
-  imports: [FormsModule, FormInputComponent, FormInputErrorsComponent],
+  imports: [FormsModule, FormInputErrorsComponent],
 })
 export class FormInputWithLabelComponent {
   
@@ -42,5 +40,19 @@ export class FormInputWithLabelComponent {
   
   clear() {
     this.model.set('');
+  }
+
+  protected passwordVisible = signal(false);
+
+  protected get inputType(): string {
+    if (this.type !== 'password') {
+      return this.type;
+    }
+
+    return this.passwordVisible() ? 'text' : 'password';
+  }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible.update(v => !v);
   }
 }

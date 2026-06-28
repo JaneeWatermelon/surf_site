@@ -46,6 +46,18 @@ p {
     font-family: 'Montserrat';
 }
 
+/* Edge */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+/* Современные Chromium */
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-textfield-decoration-container {
+    display: none;
+}
+
 button {
     border: none;
     outline: none;

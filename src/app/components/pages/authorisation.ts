@@ -3,7 +3,6 @@ import { Router, RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
 import { FormInputWithLabelComponent } from '../include/form-input-with-label';
-import { FormFileInputComponent } from '../include/form-file-input';
 import { LoginData } from '../../models/login_data';
 
 /**
@@ -11,7 +10,7 @@ import { LoginData } from '../../models/login_data';
  */
 @Component({
   selector: 'authorisation',
-  imports: [...SHARED_IMPORTS, FormModalComponent, FormInputWithLabelComponent, FormFileInputComponent],
+  imports: [...SHARED_IMPORTS, FormModalComponent, FormInputWithLabelComponent],
   templateUrl: './authorisation.html',
   styles: [`
     :host {

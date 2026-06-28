@@ -3,22 +3,23 @@
 
     <h4 form-header>Добавление новой записи</h4>
 
-    <form-input-with-label
-        form-content
-        [(model)]="post_add_data.text"
-        label="Введите текст"
-        [maxLength]="255"
-        [multiline]="true"
-        [rows]="4">
-    </form-input-with-label>
-
-    <div form-content class="flex justify-between items-end">
-      <form-file-input
-        form-content
-        label="Прикрепить изображение">
-      </form-file-input>
-      <button (click)="savePost()" class="pl-6 pr-6">Добавить</button>
-    </div>
+    <form (ngSubmit)="savePost()" form-content class="flex flex-col gap-3">
+      <form-input-with-label
+          [(model)]="post_add_data.text"
+          label="Введите текст"
+          [maxLength]="255"
+          [multiline]="true"
+          [rows]="4">
+      </form-input-with-label>
+  
+      <div class="flex justify-between items-end">
+        <form-file-input
+          [(file)]="post_add_data.image"
+          label="Прикрепить изображение">
+        </form-file-input>
+        <button type="submit" class="pl-6 pr-6">Добавить</button>
+      </div>
+    </form>
     
 
   </form-modal>

@@ -5,28 +5,36 @@ import { PostData } from "../models/post_data";
 import { ImageData } from "../models/image_data";
 import { UserData } from "../models/user_data";
 import { ImagePostShipData } from "../models/image_post_ship_data";
+import { PostAddData } from "../models/post_add_data";
 
 @Injectable()
 export class MainPageApiService {
+
+    private posts = [
+        this.createPostPair(
+            1,
+            "Hello",
+            "assets/images/default_post_image.jpg",
+            "13.06.2019"
+        ),
+        this.createPostPair(
+            2,
+            "Hello Hello Hello",
+            "assets/images/default_post_image_2.jpg",
+            "13.06.2119"
+        ),
+    ];
 
     constructor(private httpClient: HttpClient) {
 
     }
 
-    getPosts(): Observable<Object[]> {
+    private createImage(id: number, code: string): ImageData {
+        return new ImageData(id, code);
+    }
 
-        // return this.httpClient.get<any[]>("/api/GetPosts");
-
-        var image1 = new ImageData(
-            1,
-            "assets/images/default_post_image.jpg"
-        )
-        var image2 = new ImageData(
-            2,
-            "assets/images/default_post_image_2.jpg"
-        )
-        
-        var user1 = new UserData(
+    private createUser(): UserData {
+        return new UserData(
             1,
             "Jane",
             "",
@@ -39,48 +47,89 @@ export class MainPageApiService {
             "",
             "13.06.2019",
             "",
-        )
-        var post1 = new PostData(
-            1, 
-            "Hello", 
-            user1,
-            "13.06.2019"
-        )
-        var post2 = new PostData(
-            2, 
-            "Hello Hello Hello", 
-            user1,
-            "13.06.2119"
-        )
-
-        var imagePostShip1 = new ImagePostShipData(
-            1,
-            post1,
-            image1
-        )
-        var imagePostShip2 = new ImagePostShipData(
-            2,
-            post2,
-            image2
-        )
-
-        var postShipPair1 = {
-            post: post1,
-            imageShip: imagePostShip1,
-        }
-        var postShipPair2 = {
-            post: post2,
-            imageShip: imagePostShip2,
-        }
-
-        return of([
-            postShipPair1,
-            postShipPair2,
-        ]);
+        );
     }
 
-    savePost(post: any): Observable<void> { /** Тут any нужно заменить на класс для постов  */
-        // return this.httpClient.post<void>("/api/SavePost", post);
+    private createPost(
+        id: number,
+        text: string,
+        author: UserData,
+        created: string
+    ): PostData {
+        return new PostData(
+            id,
+            text,
+            author,
+            created
+        );
+    }
+
+    private createImagePostShip(
+        id: number,
+        post: PostData,
+        image: ImageData
+    ): ImagePostShipData {
+        return new ImagePostShipData(
+            id,
+            post,
+            image
+        );
+    }
+
+    private createPostPair(
+        id: number,
+        text: string,
+        imagePath: string,
+        created: string
+    ) {
+        const user = this.createUser();
+        const post = this.createPost(id, text, user, created);
+        const image = this.createImage(id, imagePath);
+        const imageShip = this.createImagePostShip(id, post, image);
+
+        return {
+            post,
+            imageShip,
+        };
+    }
+
+    getPosts(): Observable<Object[]> {
+
+        // return this.httpClient.get<any[]>("/api/GetPosts");
+
+        return of([...this.posts]);
+    }
+
+    savePost(data: PostAddData): Observable<void> {
+        // return this.httpClient.post<void>('/api/posts', data);
+
+        const user = this.createUser();
+
+        const post = this.createPost(
+            this.posts.length + 1,
+            data.text,
+            user,
+            new Date().toLocaleString()
+        );
+
+        const image = this.createImage(
+            this.posts.length + 1,
+            data.image
+                ? URL.createObjectURL(data.image)
+                : 'assets/images/default_post_image.jpg'
+        );
+
+        const imageShip = this.createImagePostShip(
+            this.posts.length + 1,
+            post,
+            image
+        );
+
+        this.posts.unshift({
+            post,
+            imageShip,
+        });
+
         return of(undefined);
     }
 }

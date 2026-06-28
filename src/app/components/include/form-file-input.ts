@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Post_add_data } from '../../models/post_add_data';
+import { Component, effect, Input, model } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared-imports';
 
 @Component({
@@ -9,19 +8,30 @@ import { SHARED_IMPORTS } from '../../shared-imports';
 })
 export class FormFileInputComponent {
   @Input() label = '';
-  @Input() file?: File | null;
+  // @Input() file?: File | null;
+  file = model<File | null>(null);
 
   selectedFileName = '';
 
+  constructor() {
+    effect(() => {
+      const file = this.file();
+
+      this.selectedFileName = file?.name ?? '';
+    });
+  }
+
   onSelect(event: Event) {
-      const input = event.target as HTMLInputElement;
+    const input = event.target as HTMLInputElement;
 
-      if (!input.files?.length) {
-          return;
-      }
+    if (!input.files?.length) {
+      return;
+    }
 
-      this.file = input.files[0];
-      this.selectedFileName = this.file.name;
+    const file = input.files[0];
+
+    this.file.set(file);
+    this.selectedFileName = file.name;
   }
 }
 

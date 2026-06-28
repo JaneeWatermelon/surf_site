@@ -1,4 +1,4 @@
-export class Post_add_data {
-    text: string = "";
-    file_path: string = "";
+export class PostAddData {
+    text: string = '';
+    image: File | null = null;
 }

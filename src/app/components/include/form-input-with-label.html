@@ -7,12 +7,21 @@
             <img src="assets/icons/refresh.svg" class="h-4 cursor-pointer">
         }
 
-        @if (labelIcon === 'eye-show') {
+        <!-- @if (labelIcon === 'eye-show') {
             <img src="assets/icons/eye-show.svg" class="h-4 cursor-pointer">
         }
 
         @if (labelIcon === 'eye-off') {
             <img src="assets/icons/eye-off.svg" class="h-4 cursor-pointer">
+        } -->
+
+        @if (type === 'password') {
+            <img
+                [src]="passwordVisible()
+                    ? 'assets/icons/eye-show.svg'
+                    : 'assets/icons/eye-off.svg'"
+                class="h-4 cursor-pointer"
+                (click)="togglePasswordVisibility()">
         }
     </div>
 
@@ -30,7 +39,7 @@
                     #inp="ngModel"
                     [(ngModel)]="model"
                     /* (ngModelChange)="model.set($event)" */
-                    [type]="type"
+                    [type]="inputType"
                     [placeholder]="placeholder"
                     [required]="required"
                     [maxLength]="maxLength || 16"
@@ -52,7 +61,7 @@
 
             }
 
-            @if (rightIcon === 'clear') {
+            @if (rightIcon === 'clear' && model()) {
                 <img
                     src="assets/icons/clear.svg"
                     class="h-2 cursor-pointer"
