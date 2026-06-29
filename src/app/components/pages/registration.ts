@@ -44,18 +44,8 @@ export class Registration {
         .pipe(first())
         .subscribe(() => {
           this.registration_data = new RegistrationData();
-
-          this.getUsers();
         });
     });
-  }
-  getUsers() {
-    this.registrationApiService
-      .getUsers()
-      .pipe(first())
-      .subscribe(users => {
-        this.users = users;
-      });
   }
 
   navAuthorisation() {

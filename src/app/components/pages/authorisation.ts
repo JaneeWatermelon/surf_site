@@ -33,8 +33,6 @@ export class Authorisation {
   }
 
   login(form: NgForm) {
-    console.log(form.invalid);
-
     form.control.markAllAsTouched();
     
     queueMicrotask(() => {
@@ -46,10 +44,8 @@ export class Authorisation {
         this.loginApiService
         .login(this.login_data)
         .pipe(first())
-        .subscribe(is_authenticated => {
-          this.is_authenticated = is_authenticated;
-
-          // this.getUsers();
+        .subscribe(user => {
+          this.is_authenticated = !!user;
         });
     });
   }
