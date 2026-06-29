@@ -32,4 +32,8 @@ export class FormInputErrorsComponent {
       return !!this.errors && (this.submitted || this.touched);
   }
 
+  get hasErrors(): boolean {
+      return !!this.errors;
+  }
+
 }

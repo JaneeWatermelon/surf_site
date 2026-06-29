@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, QueryList, signal, ViewChildren } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
@@ -30,11 +30,28 @@ export class Registration {
 
   register(form: NgForm) {
     console.log(form.invalid);
+
     form.control.markAllAsTouched();
-    if (form.invalid) {
-        form.control.markAllAsTouched();
-        return;
-    }
+    
+    queueMicrotask(() => {
+
+        if (this.inputs.some(input => input.invalid)) {
+            return;
+        }
+
+        this.registrationApiService
+        .register(this.registration_data)
+        .pipe(first())
+        .subscribe(() => {
+          this.registration_data = new RegistrationData();
+
+          this.getUsers();
+        });
+    });
+    // if (form.invalid) {
+    //     form.control.markAllAsTouched();
+    //     return;
+    // }
     // if (
     //     !this.registration_data.nickname ||
     //     !this.registration_data.email ||
@@ -44,14 +61,14 @@ export class Registration {
     //     return;
     // }
 
-    this.registrationApiService
-      .register(this.registration_data)
-      .pipe(first())
-      .subscribe(() => {
-        this.registration_data = new RegistrationData();
+    // this.registrationApiService
+    //   .register(this.registration_data)
+    //   .pipe(first())
+    //   .subscribe(() => {
+    //     this.registration_data = new RegistrationData();
 
-        this.getUsers();
-      });
+    //     this.getUsers();
+    //   });
   }
   getUsers() {
     this.registrationApiService
@@ -65,4 +82,7 @@ export class Registration {
   navAuthorisation() {
     this.router.navigate(["authorisation"]);
   }
+
+  @ViewChildren(FormInputWithLabelComponent)
+  inputs!: QueryList<FormInputWithLabelComponent>;
 }

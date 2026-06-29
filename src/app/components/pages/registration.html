@@ -6,7 +6,6 @@
     <form form-content #registrationForm="ngForm" (ngSubmit)="register(registrationForm)" class="flex flex-col gap-3">
       <div class="flex gap-6">
         <div class="flex flex-col gap-3 w-full">
-          {{registrationForm.submitted}}
   
           <form-input-with-label
               [(model)]="registration_data.nickname"

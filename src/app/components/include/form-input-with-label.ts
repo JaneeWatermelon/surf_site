@@ -59,5 +59,12 @@ export class FormInputWithLabelComponent {
   togglePasswordVisibility(): void {
     this.passwordVisible.update(v => !v);
   }
+
+  @ViewChild(FormInputErrorsComponent)
+  private errorsComponent?: FormInputErrorsComponent;
+
+  get invalid(): boolean {
+      return this.errorsComponent?.hasErrors ?? false;
+  }
 }
 
