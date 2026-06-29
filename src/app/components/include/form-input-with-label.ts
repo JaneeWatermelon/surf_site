@@ -1,5 +1,5 @@
 import { Component, Input, model, signal, ViewChild } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { FormInputErrorsComponent } from './form-input-errors';
 
 type LabelIcon = 'refresh' | 'eye-show' | 'eye-off' | null;
@@ -17,6 +17,8 @@ export class FormInputWithLabelComponent {
   @ViewChild('inp')
   inp?: NgModel;
   
+  @Input() form?: NgForm;
+  
   @Input() label = '';
   
   @Input() labelIcon: LabelIcon = null;
@@ -25,6 +27,8 @@ export class FormInputWithLabelComponent {
   
   // Переменные input компоненты
   model = model<string>('');
+
+  @Input() name = '';
 
   @Input() placeholder = '';
   @Input() type = 'text';
@@ -56,3 +60,4 @@ export class FormInputWithLabelComponent {
     this.passwordVisible.update(v => !v);
   }
 }
+

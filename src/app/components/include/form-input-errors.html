@@ -1,10 +1,14 @@
-@if (errors) {
+@if (showErrors) {
     <div class="flex flex-col">
         @for (error of errors | keyvalue; track error.key) {
             @if (error.key == 'pattern') {
-            <h5 class="text-error">
-                {{ patternErrorText || getErrorMessage(error.key, error.value) }}
-            </h5>
+                <h5 class="text-error">
+                    {{ patternErrorText || getErrorMessage(error.key, error.value) }}
+                </h5>
+            } @else {
+                <h5 class="text-error">
+                    {{ getErrorMessage(error.key, error.value) }}
+                </h5>
             }
         }
     </div>

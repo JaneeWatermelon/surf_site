@@ -12,6 +12,9 @@ export class FormInputErrorsComponent {
 
   @Input() errors: ValidationErrors | null = null;
   @Input() patternErrorText: string = '';
+
+  @Input() submitted = false;
+  @Input() touched: boolean = false;
   
   readonly errorMessages: Record<string, (value: any) => string> = {
     required: () => 'Поле является обязательным.',
@@ -23,6 +26,10 @@ export class FormInputErrorsComponent {
 
   getErrorMessage(key: string, value: any): string {
     return this.errorMessages[key]?.(value) ?? 'Некорректное значение.';
+  }
+
+  get showErrors(): boolean {
+      return !!this.errors && (this.submitted || this.touched);
   }
 
 }

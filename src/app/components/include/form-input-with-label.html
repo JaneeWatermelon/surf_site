@@ -33,12 +33,15 @@
                 <img src="assets/icons/email.svg" class="h-4">
             }
 
+            <!-- <ng-content select="[input-content]"></ng-content> -->
+
             @if (!multiline) {
 
                 <input
                     #inp="ngModel"
                     [(ngModel)]="model"
                     /* (ngModelChange)="model.set($event)" */
+                    [name]="name"
                     [type]="inputType"
                     [placeholder]="placeholder"
                     [required]="required"
@@ -52,6 +55,7 @@
                     #inp="ngModel"
                     [(ngModel)]="model"
                     /* (ngModelChange)="model.set($event)" */
+                    [name]="name"
                     [rows]="rows"
                     [required]="required"
                     [maxLength]="maxLength  || 16"
@@ -70,7 +74,16 @@
 
         </div>
 
-        <form-input-errors [errors]="inp?.errors ?? null" [patternErrorText]="patternErrorText"></form-input-errors>
+        <!-- <ng-content select="[errors-content]"></ng-content> -->
+
+        <!-- <form-input-errors [errors]="inp?.errors ?? null" [patternErrorText]="patternErrorText"></form-input-errors> -->
+        <form-input-errors 
+            errors-content 
+            [errors]="inp?.errors ?? null" 
+            [submitted]="form?.submitted ?? false"
+            [touched]="inp?.touched ?? false"
+            [patternErrorText]="patternErrorText">
+        </form-input-errors>
 
     </div>
 

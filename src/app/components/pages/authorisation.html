@@ -7,7 +7,7 @@
       <div class="flex flex-col gap-3 w-full">
 
         <form-input-with-label
-            [(model)]="login_data.nickname_or_email"
+            [(ngModel)]="login_data.nickname_or_email"
             label="Псевдоним или почта*"
             /* labelIcon="refresh" */
             [maxLength]="31"
@@ -16,7 +16,7 @@
         </form-input-with-label>
 
         <form-input-with-label
-            [(model)]="login_data.password"
+            [(ngModel)]="login_data.password"
             label="Пароль*"
             labelIcon="eye-off"
             [maxLength]="20"

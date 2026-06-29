@@ -7,7 +7,7 @@ export class RegistrationData {
     last_name: string = "";
     first_name: string = "";
 
-    photo: string = "";
+    photo: File | null = null;
 
     contacts: string = "";
     about: string = "";

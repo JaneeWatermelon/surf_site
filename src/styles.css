@@ -74,6 +74,7 @@ button {
     font-weight: bolder;
 
     height: fit-content;
+    cursor: pointer;
 
 }
 

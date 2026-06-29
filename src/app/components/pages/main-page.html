@@ -5,7 +5,7 @@
 
     <form (ngSubmit)="savePost()" form-content class="flex flex-col gap-3">
       <form-input-with-label
-          [(model)]="post_add_data.text"
+          [(ngModel)]="post_add_data.text"
           label="Введите текст"
           [maxLength]="255"
           [multiline]="true"
