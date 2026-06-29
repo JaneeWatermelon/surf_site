@@ -19,6 +19,8 @@ export class FormInputWithLabelComponent {
   
   @Input() form?: NgForm;
   
+  @Input() submitted: boolean = false;
+
   @Input() label = '';
   
   @Input() labelIcon: LabelIcon = null;

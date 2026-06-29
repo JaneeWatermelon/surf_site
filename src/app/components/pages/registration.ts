@@ -48,27 +48,6 @@ export class Registration {
           this.getUsers();
         });
     });
-    // if (form.invalid) {
-    //     form.control.markAllAsTouched();
-    //     return;
-    // }
-    // if (
-    //     !this.registration_data.nickname ||
-    //     !this.registration_data.email ||
-    //     !this.registration_data.password ||
-    //     !this.registration_data.password_repeat
-    // ) {
-    //     return;
-    // }
-
-    // this.registrationApiService
-    //   .register(this.registration_data)
-    //   .pipe(first())
-    //   .subscribe(() => {
-    //     this.registration_data = new RegistrationData();
-
-    //     this.getUsers();
-    //   });
   }
   getUsers() {
     this.registrationApiService

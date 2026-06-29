@@ -3,23 +3,27 @@
 
     <h4 form-header>Авторизация пользователя</h4>
     
-    <div form-content class="flex gap-6 items-center">
+    <form form-content #authorisationForm="ngForm" (ngSubmit)="login(authorisationForm)" class="flex gap-6 items-center">
       <div class="flex flex-col gap-3 w-full">
 
         <form-input-with-label
-            [(ngModel)]="login_data.nickname_or_email"
+            [(model)]="login_data.nickname_or_email"
+            name="nickname_or_email"
             label="Псевдоним или почта*"
-            /* labelIcon="refresh" */
+            [submitted]="authorisationForm.submitted"
             [maxLength]="31"
+            [required]="true"
             pattern="[a-zA-Zа-яА-Я0-9_]+"
             patternErrorText="Латиница, кириллица, цифры и подчёркивания">
         </form-input-with-label>
 
         <form-input-with-label
-            [(ngModel)]="login_data.password"
+            [(model)]="login_data.password"
+            name="password"
             label="Пароль*"
-            labelIcon="eye-off"
+            [submitted]="authorisationForm.submitted"
             [maxLength]="20"
+            [required]="true"
             pattern="[a-zA-Z0-9_]+"
             patternErrorText="Латиница, цифры и подчёркивания"
             type="password">
@@ -29,13 +33,14 @@
       <div class="w-full h-fit">
         <div class="flex flex-col items-center gap-3">
           <p class="text-writing">* - поля, обязательные для заполнения</p>
-          <button class="min-w-40">Войти</button>
+          <button type="submit" class="min-w-40">Войти</button>
         </div>
       </div>
-    </div>
-
+    </form>
+    
   </form-modal>
-
+  
+  {{is_authenticated}}
   <div form-content class="flex justify-between items-center gap-3">
       <p class="text-writing">Ещё нет аккаунта?</p>
       <button (click)="navRegistration()">Зарегистрироваться</button>

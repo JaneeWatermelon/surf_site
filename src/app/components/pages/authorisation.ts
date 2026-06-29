@@ -1,9 +1,12 @@
-import { Component, signal } from '@angular/core';
+import { Component, QueryList, signal, ViewChildren } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
 import { FormInputWithLabelComponent } from '../include/form-input-with-label';
 import { LoginData } from '../../models/login_data';
+import { NgForm } from '@angular/forms';
+import { LoginApiService } from '../../services/login-api-service';
+import { first } from 'rxjs';
 
 /**
  * Главная страница
@@ -23,9 +26,36 @@ import { LoginData } from '../../models/login_data';
 export class Authorisation {
   login_data: LoginData = new LoginData();
 
-  constructor(private router: Router) {
+  is_authenticated: boolean = false;
+
+  constructor(private router: Router, private loginApiService: LoginApiService) {
 
   }
+
+  login(form: NgForm) {
+    console.log(form.invalid);
+
+    form.control.markAllAsTouched();
+    
+    queueMicrotask(() => {
+
+        if (this.inputs.some(input => input.invalid)) {
+            return;
+        }
+
+        this.loginApiService
+        .login(this.login_data)
+        .pipe(first())
+        .subscribe(is_authenticated => {
+          this.is_authenticated = is_authenticated;
+
+          // this.getUsers();
+        });
+    });
+  }
+
+  @ViewChildren(FormInputWithLabelComponent)
+  inputs!: QueryList<FormInputWithLabelComponent>;
 
   navRegistration() {
     this.router.navigate(["registration"]);
