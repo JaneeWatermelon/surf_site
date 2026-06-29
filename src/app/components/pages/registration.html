@@ -8,37 +8,19 @@
         <div class="flex flex-col gap-3 w-full">
   
           <form-input-with-label
-              [(model)]="registration_data.nickname"
-              [form]="registrationForm"
-              name="nickname"
+              [(model)]="registration_data.login"
+              [submitted]="registrationForm.submitted"
+              name="login"
               label="Псевдоним*"
               [maxLength]="20"
               [required]="true"
               pattern="[a-zA-Zа-яА-Я0-9_]+"
               patternErrorText="Латиница, кириллица, цифры и подчёркивания">
-              <!-- <input input-content
-                #inp="ngModel"
-                [(ngModel)]="registration_data.nickname"
-                /* (ngModelChange)="model.set($event)" */
-                name="nickname"
-                type="text"
-                [placeholder]=""
-                [required]="true"
-                [maxLength]="20"
-                pattern="[a-zA-Zа-яА-Я0-9_]+"
-                class="w-full">
-
-              <form-input-errors 
-                errors-content 
-                [errors]="inp?.errors ?? null" 
-                [submitted]="registrationForm.submitted"
-                [touched]="inp?.touched ?? false"
-                patternErrorText="Латиница, кириллица, цифры и подчёркивания">
-              </form-input-errors> -->
           </form-input-with-label>
   
           <form-input-with-label
               [(model)]="registration_data.email"
+              [submitted]="registrationForm.submitted"
               name="email"
               label="Почта*"
               [maxLength]="31"
@@ -50,6 +32,7 @@
   
           <form-input-with-label
               [(model)]="registration_data.password"
+              [submitted]="registrationForm.submitted"
               name="password"
               label="Пароль*"
               labelIcon="eye-off"
@@ -61,8 +44,9 @@
           </form-input-with-label>
           
           <form-input-with-label
-              [(model)]="registration_data.password_repeat"
-              name="password_repeat"
+              [(model)]="registration_data.passwordRepeat"
+              [submitted]="registrationForm.submitted"
+              name="passwordRepeat"
               label="Подтвердите пароль*"
               labelIcon="eye-off"
               [maxLength]="20"
@@ -73,15 +57,16 @@
           </form-input-with-label>
   
           <form-input-with-label
-              [(model)]="registration_data.last_name"
-              name="last_name"
+              [(model)]="registration_data.secondName"
+              [submitted]="registrationForm.submitted"
+              name="secondName"
               [maxLength]="31"
               label="Фамилия">
           </form-input-with-label>
   
           <form-input-with-label
-              [(model)]="registration_data.first_name"
-              name="first_name"
+              [(model)]="registration_data.firstName"
+              name="firstName"
               [maxLength]="31"
               label="Имя">
           </form-input-with-label>
@@ -93,13 +78,14 @@
       </div>
   
       <form-file-input
-        [(file)]="registration_data.photo"
+        [(file)]="registration_data.avatar"
         label="Выберите фото">
       </form-file-input>
   
       <form-input-with-label
-          [(model)]="registration_data.contacts"
-          name="contacts"
+          [(model)]="registration_data.contactInfo"
+          [submitted]="registrationForm.submitted"
+          name="contactInfo"
           label="Контактная информация"
           [maxLength]="255"
           [multiline]="true"
@@ -108,6 +94,7 @@
   
       <form-input-with-label
           [(model)]="registration_data.about"
+          [submitted]="registrationForm.submitted"
           name="about"
           label="О себе"
           [maxLength]="255"
@@ -116,8 +103,9 @@
       </form-input-with-label>
   
       <form-input-with-label
-          [(model)]="registration_data.achievements"
-          name="achievements"
+          [(model)]="registration_data.achivements"
+          [submitted]="registrationForm.submitted"
+          name="achivements"
           label="Достижения"
           [maxLength]="255"
           [multiline]="true"

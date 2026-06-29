@@ -24,6 +24,8 @@ export class MainPage {
   post_add_data: PostAddData = new PostAddData();
   posts: any[] = [];
 
+  selectedImage: File | null = null;
+
   constructor(private router: Router, private mainPageApiService: MainPageApiService) {
 
   }

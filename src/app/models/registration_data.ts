@@ -1,15 +1,14 @@
 export class RegistrationData {
-    nickname: string = "";
+    login: string = "";
     email: string = "";
     password: string = "";
-    password_repeat: string = "";
+    passwordRepeat: string = "";
 
-    last_name: string = "";
-    first_name: string = "";
+    secondName: string = "";
+    firstName: string = "";
 
-    photo: File | null = null;
-
-    contacts: string = "";
+    avatar: File | null = null;
+    contactInfo: string = "";
     about: string = "";
-    achievements: string = "";
+    achivements: string = "";
 }

@@ -29,21 +29,48 @@ export class Registration {
   }
 
   register(form: NgForm) {
-    console.log(form.invalid);
-
     form.control.markAllAsTouched();
     
     queueMicrotask(() => {
+      console.log(this.registration_data);
 
         if (this.inputs.some(input => input.invalid)) {
             return;
         }
 
+        const formData = new FormData();
+
+        formData.append("login", this.registration_data.login);
+        formData.append("email", this.registration_data.email);
+        formData.append("password", this.registration_data.password);
+        formData.append("passwordRepeat", this.registration_data.passwordRepeat);
+
+        formData.append("firstName", this.registration_data.firstName);
+        formData.append("secondName", this.registration_data.secondName);
+        formData.append("contactInfo", this.registration_data.contactInfo);
+        formData.append("about", this.registration_data.about);
+        formData.append("achivements", this.registration_data.achivements);
+
+        if (this.registration_data.avatar) {
+            formData.append("avatar", this.registration_data.avatar);
+        }
+
         this.registrationApiService
-        .register(this.registration_data)
+        .register(formData)
         .pipe(first())
-        .subscribe(() => {
-          this.registration_data = new RegistrationData();
+        .subscribe({
+          next: () => {
+            console.log("next");
+            this.registration_data = new RegistrationData();
+
+            // Переход на страницу авторизации
+            this.navAuthorisation();
+          },
+          error: (err) => {
+            console.error(err);
+            // Здесь позже можно вывести сообщение об ошибке
+            // например "Пользователь с таким email уже существует"
+          }
         });
     });
   }

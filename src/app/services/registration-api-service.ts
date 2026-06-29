@@ -13,7 +13,7 @@ export class RegistrationApiService {
 
     }
 
-    register(data: RegistrationData): Observable<UserData> {
+    register(data: FormData): Observable<UserData> {
         return this.httpClient.post<UserData>("http://localhost:5283/api/Users/Register", data);
 
     }
