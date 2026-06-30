@@ -35,16 +35,14 @@
       <div form-header class="flex items-center gap-2">
         <div class="rounded-[50px] overflow-hidden">
           @if (!!current_user && current_user.avatar) {
-            <img [src]="current_user.avatar">
+            <img [src]="environment.apiUrl + '/' + current_user.avatar">
           }
           @else {
             <img src="assets/images/default_avatar.jpg">
           }
         </div>
         <div class="d-flex direction-column">
-          <!-- <p>{{item.post.author}}</p> -->
           <p>{{item.post.author.login}}</p>
-          <!-- <p>{{item.post.author}}</p> -->
           <h5>{{item.post.creationDateTime}}</h5>
         </div>
       </div>
@@ -52,7 +50,7 @@
       <div form-content class="flex flex-col gap-2">
         <p>{{item.post.text}}</p>
         @for (image of item.images; track $index) {
-          <img [src]="image.code">
+          <img [src]="environment.apiUrl + '/' + image.code">
         }
       </div>
   

@@ -13,6 +13,7 @@ import { LoginApiService } from '../../services/login-api-service';
 import { UserData } from '../../models/user_data';
 import { PostData } from '../../models/post_data';
 import { PostWithImagesData } from '../../models/post_with_images_data';
+import { environment } from '../../../environments/environment';
 
 /**
  * Главная страница
@@ -27,6 +28,7 @@ import { PostWithImagesData } from '../../models/post_with_images_data';
 })
 export class MainPage {
   auth = inject(AuthService);
+  protected readonly environment = environment;
 
   post_add_data: PostAddData = new PostAddData();
   object_list: PostWithImagesData[] = [];
