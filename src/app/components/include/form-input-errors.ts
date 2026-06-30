@@ -15,6 +15,8 @@ export class FormInputErrorsComponent {
 
   @Input() submitted = false;
   @Input() touched: boolean = false;
+
+  @Input() serverErrors: string[] = [];
   
   readonly errorMessages: Record<string, (value: any) => string> = {
     required: () => 'Поле является обязательным.',
@@ -29,7 +31,7 @@ export class FormInputErrorsComponent {
   }
 
   get showErrors(): boolean {
-      return !!this.errors && (this.submitted || this.touched);
+      return this.serverErrors.length > 0 || (!!this.errors && (this.submitted || this.touched));
   }
 
   get hasErrors(): boolean {

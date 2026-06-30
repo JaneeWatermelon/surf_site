@@ -24,6 +24,8 @@ export class Registration {
   registration_data: RegistrationData = new RegistrationData();
   users: UserData[] = [];
 
+  serverErrors: Record<string, string[]> = {};
+
   constructor(private router: Router, private registrationApiService: RegistrationApiService) {
 
   }
@@ -55,6 +57,8 @@ export class Registration {
             formData.append("avatar", this.registration_data.avatar);
         }
 
+        this.serverErrors = {};
+
         this.registrationApiService
         .register(formData)
         .pipe(first())
@@ -68,8 +72,8 @@ export class Registration {
           },
           error: (err) => {
             console.error(err);
-            // Здесь позже можно вывести сообщение об ошибке
-            // например "Пользователь с таким email уже существует"
+            this.serverErrors = err.error.errors ?? {};
+            form.control.markAllAsTouched();
           }
         });
     });

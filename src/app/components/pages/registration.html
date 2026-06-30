@@ -14,6 +14,7 @@
               label="Псевдоним*"
               [maxLength]="20"
               [required]="true"
+              [serverErrors]="serverErrors['login'] ?? []"
               pattern="[a-zA-Zа-яА-Я0-9_]+"
               patternErrorText="Латиница, кириллица, цифры и подчёркивания">
           </form-input-with-label>
@@ -114,7 +115,14 @@
   
       <div class="flex justify-between items-start">
         <p class="text-writing">* - поля, обязательные для заполнения</p>
-        <button type="submit">Зарегистрироваться</button>
+        <div class="flex flex-col">
+          <button type="submit">Зарегистрироваться</button>
+          @for (error of serverErrors[''] ?? []; track $index) {
+              <h5 class="text-error text-center">
+                  {{ error }}
+              </h5>
+          }
+        </div>
       </div>
     </form>
 

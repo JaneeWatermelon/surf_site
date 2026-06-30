@@ -16,6 +16,8 @@ export class FormInputWithLabelComponent {
   // Переменные текущей компоненты
   @ViewChild('inp')
   inp?: NgModel;
+
+  @Input() serverErrors: string[] = [];
   
   @Input() form?: NgForm;
   

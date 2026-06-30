@@ -11,5 +11,10 @@
                 </h5>
             }
         }
+        @for (error of serverErrors; track $index) {
+            <h5 class="text-error">
+                {{ error }}
+            </h5>
+        }
     </div>
 }
