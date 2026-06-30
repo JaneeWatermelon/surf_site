@@ -20,7 +20,7 @@
             [(file)]="post_add_data.image"
             label="Прикрепить изображение">
           </form-file-input>
-          <button type="submit" class="pl-6 pr-6">Добавить</button>
+          <button type="submit" class="pl-6 pr-6 min-w-40">Добавить</button>
         </div>
       </form>
       
@@ -33,9 +33,9 @@
     <form-modal class="max-w-200">
   
       <div form-header class="flex items-center gap-2">
-        <div class="aspect-square h-[50px] rounded-[50px] overflow-hidden">
+        <div class="aspect-square h-[35px] rounded-[50px] overflow-hidden">
           @if (!!current_user && current_user.avatarCode) {
-            <img class="h-[50px]" [src]="environment.apiUrl + '/' + current_user.avatarCode">
+            <img class="h-full" [src]="environment.apiUrl + '/' + current_user.avatarCode">
           }
           @else {
             <img src="assets/images/default_avatar.jpg">
@@ -43,7 +43,7 @@
         </div>
         <div class="d-flex direction-column">
           <p>{{item.post.author.login}}</p>
-          <h5>{{item.post.creationDateTime}}</h5>
+          <h5 class="text-writing">{{item.post.creationDateTime | date:'dd.MM.yyyy в HH:mm'}}</h5>
         </div>
       </div>
   

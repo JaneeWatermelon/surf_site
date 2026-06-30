@@ -12,14 +12,22 @@ type RightIcon = 'clear' | null;
   imports: [FormsModule, FormInputErrorsComponent],
 })
 export class FormInputWithLabelComponent {
+
+  
   
   // Переменные текущей компоненты
   @ViewChild('inp')
   inp?: NgModel;
+
+  
   
   @Input() form?: NgForm;
   
   @Input() submitted: boolean = false;
+
+  get showErrors(): boolean {
+    return !!this.inp?.errors && (this.submitted || !!this.inp?.touched);
+  }
 
   @Input() label = '';
   
