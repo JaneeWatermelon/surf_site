@@ -8,13 +8,14 @@ import { NgForm } from '@angular/forms';
 import { LoginApiService } from '../../services/login-api-service';
 import { first } from 'rxjs';
 import { AuthService } from '../../services/auth-service';
+import { FormCheckboxComponent } from '../include/form-checkbox';
 
 /**
  * Главная страница
  */
 @Component({
   selector: 'authorisation',
-  imports: [...SHARED_IMPORTS, FormModalComponent, FormInputWithLabelComponent],
+  imports: [...SHARED_IMPORTS, FormModalComponent, FormInputWithLabelComponent, FormCheckboxComponent],
   templateUrl: './authorisation.html',
   styles: [`
     :host {
@@ -29,7 +30,11 @@ export class Authorisation {
 
   is_authenticated: boolean = false;
 
-  constructor(private router: Router, private loginApiService: LoginApiService, private authService: AuthService) {
+  constructor(
+    private router: Router, 
+    private loginApiService: LoginApiService, 
+    private authService: AuthService,
+  ) {
 
   }
 

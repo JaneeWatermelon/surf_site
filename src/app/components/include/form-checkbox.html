@@ -1,0 +1,15 @@
+<label class="checkbox-container flex gap-2 items-center">
+    <div class="input-wrapper flex justify-center items-center aspect-square p-1 rounded-[4px] w-fit"
+        [class.outline]="!showErrors"
+        [class.outline-red]="showErrors">
+    
+        <input
+            type="checkbox"
+            [(ngModel)]="model"
+            [name]="name">
+    </div>
+
+    <span class="checkmark"></span>
+
+    <span class="text-writing">{{ label }}</span>
+</label>
