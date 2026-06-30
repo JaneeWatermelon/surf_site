@@ -49,6 +49,7 @@ export class MainPage {
       next: user => {
         this.authService.login(user);
         this.current_user = this.authService.currentUser();
+        console.log(this.current_user);
           // this.router.navigate(['']);
       },
       error: err => {

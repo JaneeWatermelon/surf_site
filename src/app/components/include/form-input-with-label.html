@@ -7,14 +7,6 @@
             <img src="assets/icons/refresh.svg" class="h-4 cursor-pointer">
         }
 
-        <!-- @if (labelIcon === 'eye-show') {
-            <img src="assets/icons/eye-show.svg" class="h-4 cursor-pointer">
-        }
-
-        @if (labelIcon === 'eye-off') {
-            <img src="assets/icons/eye-off.svg" class="h-4 cursor-pointer">
-        } -->
-
         @if (type === 'password') {
             <img
                 [src]="passwordVisible()
@@ -32,8 +24,6 @@
             @if (leftIcon === 'email') {
                 <img src="assets/icons/email.svg" class="h-4">
             }
-
-            <!-- <ng-content select="[input-content]"></ng-content> -->
 
             @if (!multiline) {
 
@@ -73,10 +63,6 @@
             }
 
         </div>
-
-        <!-- <ng-content select="[errors-content]"></ng-content> -->
-
-        <!-- <form-input-errors [errors]="inp?.errors ?? null" [patternErrorText]="patternErrorText"></form-input-errors> -->
 
         <form-input-errors 
             errors-content 

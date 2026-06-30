@@ -5,7 +5,7 @@ export class UserData extends BaseEntityData {
     login: string;
     email: string;
     password: string;
-    avatar: string;
+    avatarCode: string;
     second_name: string;
     first_name: string;
     contact_info: string;
@@ -17,7 +17,7 @@ export class UserData extends BaseEntityData {
         login: string = "",
         email: string = "",
         password: string = "",
-        avatar: string = "",
+        avatarCode: string = "",
         second_name: string = "",
         first_name: string = "",
         contact_info: string = "",
@@ -32,7 +32,7 @@ export class UserData extends BaseEntityData {
         this.login = login;
         this.email = email;
         this.password = password;
-        this.avatar = avatar;
+        this.avatarCode = avatarCode;
         this.second_name = second_name;
         this.first_name = first_name;
         this.contact_info = contact_info;

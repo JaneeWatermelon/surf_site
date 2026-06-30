@@ -33,9 +33,9 @@
     <form-modal class="max-w-200">
   
       <div form-header class="flex items-center gap-2">
-        <div class="rounded-[50px] overflow-hidden">
-          @if (!!current_user && current_user.avatar) {
-            <img [src]="environment.apiUrl + '/' + current_user.avatar">
+        <div class="aspect-square h-[50px] rounded-[50px] overflow-hidden">
+          @if (!!current_user && current_user.avatarCode) {
+            <img class="h-[50px]" [src]="environment.apiUrl + '/' + current_user.avatarCode">
           }
           @else {
             <img src="assets/images/default_avatar.jpg">
