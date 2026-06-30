@@ -7,6 +7,7 @@ import { LoginData } from '../../models/login_data';
 import { NgForm } from '@angular/forms';
 import { LoginApiService } from '../../services/login-api-service';
 import { first } from 'rxjs';
+import { AuthService } from '../../services/auth-service';
 
 /**
  * Главная страница
@@ -28,7 +29,7 @@ export class Authorisation {
 
   is_authenticated: boolean = false;
 
-  constructor(private router: Router, private loginApiService: LoginApiService) {
+  constructor(private router: Router, private loginApiService: LoginApiService, private authService: AuthService) {
 
   }
 
@@ -44,8 +45,14 @@ export class Authorisation {
         this.loginApiService
         .login(this.login_data)
         .pipe(first())
-        .subscribe(user => {
-          this.is_authenticated = !!user;
+        .subscribe({
+          next: user => {
+              this.authService.login(user);
+              this.router.navigate(['']);
+          },
+          error: err => {
+              console.error(err);
+          }
         });
     });
   }

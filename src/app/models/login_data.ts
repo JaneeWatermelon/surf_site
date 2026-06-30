@@ -1,4 +1,4 @@
 export class LoginData {
-    nickname_or_email: string = "";
+    loginOrEmail: string = "";
     password: string = "";
 }
