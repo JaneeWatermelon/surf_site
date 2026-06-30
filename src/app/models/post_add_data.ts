@@ -1,5 +1,5 @@
 export class PostAddData {
-    author_id: string = '';
+    authorId: string = '';
     text: string = '';
     image: File | null = null;
 }

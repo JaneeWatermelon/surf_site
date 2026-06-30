@@ -16,7 +16,7 @@ import { NgForm } from '@angular/forms';
  */
 @Component({
   selector: 'registration',
-  imports: [...SHARED_IMPORTS, FormModalComponent, FormInputWithLabelComponent, FormFileInputComponent, FormInputErrorsComponent],
+  imports: [...SHARED_IMPORTS, FormModalComponent, FormInputWithLabelComponent, FormFileInputComponent],
   templateUrl: './registration.html',
   //   styleUrl: './app.css'
 })

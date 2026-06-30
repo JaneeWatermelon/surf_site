@@ -1,4 +1,6 @@
-export class UserData {
+import { BaseEntityData } from "./base_entity_data";
+
+export class UserData extends BaseEntityData {
     id: number;
     login: string;
     email: string;
@@ -9,8 +11,6 @@ export class UserData {
     contact_info: string;
     about: string;
     achievements: string;
-    created_at: string;
-    updated_at: string;
 
     constructor(
         id: number = 0,
@@ -23,9 +23,11 @@ export class UserData {
         contact_info: string = "",
         about: string = "",
         achievements: string = "",
-        created_at: string = "",
-        updated_at: string = ""
+        creationDateTime: string = "",
+        lastModificationDateTime: string = ""
     ) {
+        super(creationDateTime, lastModificationDateTime);
+
         this.id = id;
         this.login = login;
         this.email = email;
@@ -36,7 +38,5 @@ export class UserData {
         this.contact_info = contact_info;
         this.about = about;
         this.achievements = achievements;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
     }
 }

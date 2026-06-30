@@ -1,47 +1,59 @@
 <main class="flex flex-col gap-6 p-6 pl-16 pr-16 justify-center">
-  <form-modal class="max-w-200" contentClass="gap-3">
-
-    <h4 form-header>Добавление новой записи</h4>
-
-    <form (ngSubmit)="savePost()" form-content class="flex flex-col gap-3">
-      <form-input-with-label
-          [(model)]="post_add_data.text"
-          label="Введите текст"
-          [maxLength]="255"
-          [multiline]="true"
-          [rows]="4">
-      </form-input-with-label>
+  @if (auth.isAuthenticated()) {
+    <form-modal class="max-w-200" contentClass="gap-3">
   
-      <div class="flex justify-between items-end">
-        <form-file-input
-          [(file)]="post_add_data.image"
-          label="Прикрепить изображение">
-        </form-file-input>
-        <button type="submit" class="pl-6 pr-6">Добавить</button>
-      </div>
-    </form>
+      <h4 form-header>Добавление новой записи</h4>
+  
+      <form form-content #addPostForm="ngForm" (ngSubmit)="savePost()" class="flex flex-col gap-3">
+        <form-input-with-label
+            [(model)]="post_add_data.text"
+            [submitted]="addPostForm.submitted"
+            name="text"
+            label="Введите текст"
+            [maxLength]="255"
+            [multiline]="true"
+            [rows]="4">
+        </form-input-with-label>
     
+        <div class="flex justify-between items-end">
+          <form-file-input
+            [(file)]="post_add_data.image"
+            label="Прикрепить изображение">
+          </form-file-input>
+          <button type="submit" class="pl-6 pr-6">Добавить</button>
+        </div>
+      </form>
+      
+    </form-modal>
+  }
 
-  </form-modal>
+  <!-- <button (click)="getPosts()">Получить посты</button> -->
 
-  <button (click)="getPosts()">Получить посты</button>
-
-  @for (item of posts; track $index) {
+  @for (item of object_list; track $index) {
     <form-modal class="max-w-200">
   
       <div form-header class="flex items-center gap-2">
         <div class="rounded-[50px] overflow-hidden">
-          <img src="assets/images/default_avatar.jpg">
+          @if (!!current_user && current_user.avatar) {
+            <img [src]="current_user.avatar">
+          }
+          @else {
+            <img src="assets/images/default_avatar.jpg">
+          }
         </div>
         <div class="d-flex direction-column">
+          <!-- <p>{{item.post.author}}</p> -->
           <p>{{item.post.author.login}}</p>
-          <h5>{{item.post.created}}</h5>
+          <!-- <p>{{item.post.author}}</p> -->
+          <h5>{{item.post.creationDateTime}}</h5>
         </div>
       </div>
   
       <div form-content class="flex flex-col gap-2">
         <p>{{item.post.text}}</p>
-        <img src="{{item.imageShip.image.code}}">
+        @for (image of item.images; track $index) {
+          <img [src]="image.code">
+        }
       </div>
   
     </form-modal>

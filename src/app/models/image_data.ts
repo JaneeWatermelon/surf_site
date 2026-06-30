@@ -1,18 +1,18 @@
-export class ImageData {
+import { BaseEntityData } from "./base_entity_data";
+
+export class ImageData extends BaseEntityData {
     id: number;
     code: string;
-    created_at: string;
-    updated_at: string;
 
     constructor(
         id: number = 0,
         code: string = "",
-        created_at: string = "",
-        updated_at: string = ""
+        creationDateTime: string = "",
+        lastModificationDateTime: string = ""
     ) {
+        super(creationDateTime, lastModificationDateTime);
+
         this.id = id;
         this.code = code;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
     }
 }

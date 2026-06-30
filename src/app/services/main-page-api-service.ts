@@ -6,6 +6,7 @@ import { ImageData } from "../models/image_data";
 import { UserData } from "../models/user_data";
 import { ImagePostShipData } from "../models/image_post_ship_data";
 import { PostAddData } from "../models/post_add_data";
+import { PostWithImagesData } from "../models/post_with_images_data";
 
 @Injectable()
 export class MainPageApiService {
@@ -14,12 +15,12 @@ export class MainPageApiService {
 
     }
 
-    getPosts(): Observable<PostData[]> {
-        return this.httpClient.get<PostData[]>("http://localhost:5283/api/Posts/Get");
+    getPosts(): Observable<PostWithImagesData[]> {
+        return this.httpClient.get<PostWithImagesData[]>("http://localhost:5283/api/Posts/Get");
 
     }
 
-    savePost(data: PostAddData): Observable<PostData> {
+    savePost(data: FormData): Observable<PostData> {
         return this.httpClient.post<PostData>("http://localhost:5283/api/Posts/Create", data);
 
     }

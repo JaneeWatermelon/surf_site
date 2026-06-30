@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
@@ -11,6 +11,8 @@ import { FormInputWithLabelComponent } from '../include/form-input-with-label';
 import { AuthService } from '../../services/auth-service';
 import { LoginApiService } from '../../services/login-api-service';
 import { UserData } from '../../models/user_data';
+import { PostData } from '../../models/post_data';
+import { PostWithImagesData } from '../../models/post_with_images_data';
 
 /**
  * Главная страница
@@ -24,8 +26,11 @@ import { UserData } from '../../models/user_data';
   //   styleUrl: './app.css'
 })
 export class MainPage {
+  auth = inject(AuthService);
+
   post_add_data: PostAddData = new PostAddData();
-  posts: any[] = [];
+  object_list: PostWithImagesData[] = [];
+  current_user: UserData | null = null;
 
   constructor(
     private router: Router, 
@@ -33,31 +38,52 @@ export class MainPage {
     private loginApiService: LoginApiService, 
     private authService: AuthService
   ) {
-
+    this.current_user = this.authService.currentUser();
+    
     this.loginApiService
     .get_user_by_id(1)
     .pipe(first())
     .subscribe({
       next: user => {
-          this.authService.login(user);
+        this.authService.login(user);
+        this.current_user = this.authService.currentUser();
           // this.router.navigate(['']);
       },
       error: err => {
           console.error(err);
       }
     });
+
+    this.getPosts();
   }
 
   getPosts() {
     this.mainPageApiService.getPosts().pipe(first()).subscribe(posts => {
       console.log(posts);
-      this.posts = posts;
+      this.object_list = posts;
     });
   }
 
   savePost() {
+
+    const formData = new FormData();
+
+    console.log(this.current_user);
+    console.log(this.post_add_data);
+
+    if (this.current_user == null) {
+      return;
+    }
+
+    formData.append("authorId", this.current_user.id.toString());
+    formData.append("text", this.post_add_data.text);
+
+    if (this.post_add_data.image) {
+        formData.append("image", this.post_add_data.image);
+    }
+    
     this.mainPageApiService
-      .savePost(this.post_add_data)
+      .savePost(formData)
       .pipe(first())
       .subscribe(() => {
         console.log("Пост сохранен");
