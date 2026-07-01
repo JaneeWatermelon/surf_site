@@ -31,7 +31,10 @@ export class FormInputErrorsComponent {
   }
 
   get showErrors(): boolean {
-      return this.serverErrors.length > 0 || (!!this.errors && (this.submitted || this.touched));
+      console.log('showErrors', this.serverErrors);
+
+      return this.serverErrors.length > 0
+          || (!!this.errors && (this.submitted || this.touched));
   }
 
   get hasErrors(): boolean {

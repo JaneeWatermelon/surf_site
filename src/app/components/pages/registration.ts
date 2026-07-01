@@ -1,4 +1,4 @@
-import { Component, QueryList, signal, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, QueryList, signal, ViewChildren } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
@@ -18,6 +18,7 @@ import { NgForm } from '@angular/forms';
   selector: 'registration',
   imports: [...SHARED_IMPORTS, FormModalComponent, FormInputWithLabelComponent, FormFileInputComponent],
   templateUrl: './registration.html',
+  providers: [RegistrationApiService]
   //   styleUrl: './app.css'
 })
 export class Registration {
@@ -26,7 +27,7 @@ export class Registration {
 
   serverErrors: Record<string, string[]> = {};
 
-  constructor(private router: Router, private registrationApiService: RegistrationApiService) {
+  constructor(private router: Router, private registrationApiService: RegistrationApiService, private cdr: ChangeDetectorRef,) {
 
   }
 
@@ -73,7 +74,10 @@ export class Registration {
           error: (err) => {
             console.error(err);
             this.serverErrors = err.error.errors ?? {};
+            console.log(this.serverErrors);
             form.control.markAllAsTouched();
+            
+            this.cdr.detectChanges();
           }
         });
     });

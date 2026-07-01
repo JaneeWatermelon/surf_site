@@ -26,6 +26,7 @@
               label="Почта*"
               [maxLength]="31"
               [required]="true"
+              [serverErrors]="serverErrors['email'] ?? []"
               type="email"
               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
               patternErrorText="Неверный формат почты, пример (example@ex.ru)">
@@ -39,6 +40,7 @@
               labelIcon="eye-off"
               [maxLength]="20"
               [required]="true"
+              [serverErrors]="serverErrors['password'] ?? []"
               pattern="[a-zA-Z0-9_]+"
               patternErrorText="Латиница, цифры и подчёркивания"
               type="password">
@@ -52,6 +54,7 @@
               labelIcon="eye-off"
               [maxLength]="20"
               [required]="true"
+              [serverErrors]="serverErrors['passwordRepeat'] ?? []"
               pattern="[a-zA-Z0-9_]+"
               patternErrorText="Латиница, цифры и подчёркивания"
               type="password">
@@ -62,6 +65,7 @@
               [submitted]="registrationForm.submitted"
               name="secondName"
               [maxLength]="31"
+              [serverErrors]="serverErrors['secondName'] ?? []"
               label="Фамилия">
           </form-input-with-label>
   
@@ -69,6 +73,7 @@
               [(model)]="registration_data.firstName"
               name="firstName"
               [maxLength]="31"
+              [serverErrors]="serverErrors['firstName'] ?? []"
               label="Имя">
           </form-input-with-label>
   
@@ -90,6 +95,7 @@
           label="Контактная информация"
           [maxLength]="255"
           [multiline]="true"
+          [serverErrors]="serverErrors['contactInfo'] ?? []"
           [rows]="2">
       </form-input-with-label>
   
@@ -100,6 +106,7 @@
           label="О себе"
           [maxLength]="255"
           [multiline]="true"
+          [serverErrors]="serverErrors['about'] ?? []"
           [rows]="2">
       </form-input-with-label>
   
@@ -110,6 +117,7 @@
           label="Достижения"
           [maxLength]="255"
           [multiline]="true"
+          [serverErrors]="serverErrors['achivements'] ?? []"
           [rows]="2">
       </form-input-with-label>
   
