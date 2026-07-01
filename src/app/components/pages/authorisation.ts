@@ -57,7 +57,7 @@ export class Authorisation {
         .pipe(first())
         .subscribe({
           next: user => {
-              this.authService.login(user);
+              this.authService.login(user, this.login_data.rememberMe);
               this.router.navigate(['']);
           },
           error: err => {

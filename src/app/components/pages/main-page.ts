@@ -47,24 +47,24 @@ export class MainPage {
 
     this.serverErrors = {};
     
-    this.loginApiService
-    .get_user_by_id(1)
-    .pipe(first())
-    .subscribe({
-      next: user => {
-        this.authService.login(user);
-        this.current_user = this.authService.currentUser();
-        console.log(this.current_user);
-          // this.router.navigate(['']);
-      },
-      error: err => {
-          console.error(err);
-          this.serverErrors = err.error.errors ?? {};
-          console.log(this.serverErrors);
+    // this.loginApiService
+    // .get_user_by_id(1)
+    // .pipe(first())
+    // .subscribe({
+    //   next: user => {
+    //     this.authService.login(user);
+    //     this.current_user = this.authService.currentUser();
+    //     console.log(this.current_user);
+    //       // this.router.navigate(['']);
+    //   },
+    //   error: err => {
+    //       console.error(err);
+    //       this.serverErrors = err.error.errors ?? {};
+    //       console.log(this.serverErrors);
           
-          this.cdr.detectChanges();
-      }
-    });
+    //       this.cdr.detectChanges();
+    //   }
+    // });
 
     this.getPosts();
   }

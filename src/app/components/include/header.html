@@ -13,7 +13,7 @@
             </div>
             <h3>{{currentUser()?.login}}</h3>
             <span class="line-ver"></span>
-            <img class="h-[20px]" src="assets/icons/logout.png">
+            <img (click)="auth.logout()" class="h-[20px]" src="assets/icons/logout.png">
         </div>
     } @else {
         <div class="flex gap-3 items-center h-full">
