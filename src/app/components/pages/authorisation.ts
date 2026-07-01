@@ -1,4 +1,4 @@
-import { Component, QueryList, signal, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, QueryList, signal, ViewChildren } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
@@ -23,10 +23,12 @@ import { FormCheckboxComponent } from '../include/form-checkbox';
       height: 100%;
       width: 100%;
     }  
-  `]
+  `],
+  providers: [LoginApiService]
 })
 export class Authorisation {
   login_data: LoginData = new LoginData();
+  serverErrors: Record<string, string[]> = {};
 
   is_authenticated: boolean = false;
 
@@ -34,6 +36,7 @@ export class Authorisation {
     private router: Router, 
     private loginApiService: LoginApiService, 
     private authService: AuthService,
+    private cdr: ChangeDetectorRef,
   ) {
 
   }
@@ -44,8 +47,10 @@ export class Authorisation {
     queueMicrotask(() => {
 
         if (this.inputs.some(input => input.invalid)) {
-            return;
+          return;
         }
+
+        this.serverErrors = {};
 
         this.loginApiService
         .login(this.login_data)
@@ -57,6 +62,9 @@ export class Authorisation {
           },
           error: err => {
               console.error(err);
+              this.serverErrors = err.error.errors ?? {};
+
+              this.cdr.detectChanges();
           }
         });
     });

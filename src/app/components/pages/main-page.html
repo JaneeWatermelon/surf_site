@@ -22,6 +22,11 @@
           </form-file-input>
           <button type="submit" class="pl-6 pr-6 min-w-40">Добавить</button>
         </div>
+        @for (error of serverErrors[''] ?? []; track $index) {
+            <h5 class="text-error text-center">
+                {{ error }}
+            </h5>
+        }
       </form>
       
     </form-modal>

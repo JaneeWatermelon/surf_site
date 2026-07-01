@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
@@ -34,13 +34,18 @@ export class MainPage {
   object_list: PostWithImagesData[] = [];
   current_user: UserData | null = null;
 
+  serverErrors: Record<string, string[]> = {};
+
   constructor(
     private router: Router, 
     private mainPageApiService: MainPageApiService, 
     private loginApiService: LoginApiService, 
-    private authService: AuthService
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef,
   ) {
     this.current_user = this.authService.currentUser();
+
+    this.serverErrors = {};
     
     this.loginApiService
     .get_user_by_id(1)
@@ -54,6 +59,10 @@ export class MainPage {
       },
       error: err => {
           console.error(err);
+          this.serverErrors = err.error.errors ?? {};
+          console.log(this.serverErrors);
+          
+          this.cdr.detectChanges();
       }
     });
 
