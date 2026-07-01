@@ -1,4 +1,4 @@
-import { Component, effect, Input, model } from '@angular/core';
+import { Component, effect, EventEmitter, Input, model, Output } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared-imports';
 
 @Component({
@@ -10,6 +10,8 @@ export class FormFileInputComponent {
   @Input() label = '';
   // @Input() file?: File | null;
   file = model<File | null>(null);
+
+  @Output() fileSelected = new EventEmitter<File | null>();
 
   selectedFileName = '';
 
@@ -32,6 +34,8 @@ export class FormFileInputComponent {
 
     this.file.set(file);
     this.selectedFileName = file.name;
+
+    this.fileSelected.emit(file);
   }
 }
 

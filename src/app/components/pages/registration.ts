@@ -25,10 +25,22 @@ export class Registration {
   registration_data: RegistrationData = new RegistrationData();
   users: UserData[] = [];
 
+  avatarPreview: string | null = null;
+
+  onAvatarChanged(file: File | null): void {
+      if (this.avatarPreview) {
+          URL.revokeObjectURL(this.avatarPreview);
+      }
+
+      this.avatarPreview = file
+          ? URL.createObjectURL(file)
+          : null;
+  }
+
   serverErrors: Record<string, string[]> = {};
 
   constructor(private router: Router, private registrationApiService: RegistrationApiService, private cdr: ChangeDetectorRef,) {
-
+    
   }
 
   register(form: NgForm) {

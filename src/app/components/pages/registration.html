@@ -1,5 +1,5 @@
 <main class="flex flex-col items-center gap-6 p-6 pl-16 pr-16 justify-center">
-  <form-modal class="max-w-300 gap-6" contentClass="p-16 pt-6 pb-6">
+  <form-modal class="max-w-200 w-full gap-6" contentClass="p-16 pt-6 pb-6">
 
     <h4 form-header>Регистрация нового пользователя</h4>
     
@@ -80,12 +80,13 @@
   
         </div>  
         <div class="w-full h-fit rounded-[4px] overflow-hidden outline">
-          <img src="assets/images/default_post_image.jpg">
+          <img class="w-full" [src]="avatarPreview || 'assets/images/default_registration_image.jpg'">
         </div>
       </div>
   
       <form-file-input
         [(file)]="registration_data.avatar"
+        (fileSelected)="onAvatarChanged($event)"
         label="Выберите фото">
       </form-file-input>
   
