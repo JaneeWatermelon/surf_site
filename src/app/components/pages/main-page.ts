@@ -97,11 +97,20 @@ export class MainPage {
     this.mainPageApiService
       .savePost(formData)
       .pipe(first())
-      .subscribe(() => {
-        console.log("Пост сохранен");
-        this.post_add_data = new PostAddData();
+      .subscribe({
+        next: () => {
+          console.log("Пост сохранен");
+          this.post_add_data = new PostAddData();
 
-        this.getPosts();
+          this.getPosts();
+        },
+        error: (err) => {
+          console.error(err);
+          this.serverErrors = err.error.errors ?? {};
+          console.log(this.serverErrors);
+          
+          this.cdr.detectChanges();
+        }
       });
   }
 
