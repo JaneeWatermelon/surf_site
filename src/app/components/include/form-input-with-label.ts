@@ -43,6 +43,7 @@ export class FormInputWithLabelComponent {
 
   @Input() required = false;
   @Input() maxLength?: number;
+  @Input() minLength?: number;
 
   @Input() multiline = false;
   @Input() rows = 4;

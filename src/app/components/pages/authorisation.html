@@ -23,6 +23,7 @@
             name="password"
             label="Пароль*"
             [submitted]="authorisationForm.submitted"
+            [minLength]="6"
             [maxLength]="20"
             [required]="true"
             [serverErrors]="serverErrors['password'] ?? []"
