@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, QueryList, signal, ViewChildren } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
@@ -69,6 +69,9 @@ export class MainPage {
     this.getPosts();
   }
 
+  @ViewChildren(FormInputWithLabelComponent)
+  inputs!: QueryList<FormInputWithLabelComponent>;
+
   getPosts() {
     this.mainPageApiService.getPosts().pipe(first()).subscribe(posts => {
       console.log(posts);
@@ -77,6 +80,9 @@ export class MainPage {
   }
 
   savePost() {
+    if (this.inputs.some(input => input.invalid)) {
+        return;
+    }
 
     const formData = new FormData();
 
@@ -103,6 +109,7 @@ export class MainPage {
           this.post_add_data = new PostAddData();
 
           this.getPosts();
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error(err);
