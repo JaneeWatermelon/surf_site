@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, QueryList, signal, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, QueryList, signal, ViewChildren } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
@@ -21,18 +21,103 @@ import { environment } from '../../../environments/environment';
   imports: [...SHARED_IMPORTS, FormModalComponent, FormFileInputComponent, FormInputWithLabelComponent],
   templateUrl: './main-page.html',
   standalone: true,
-  providers: [MainPageApiService]
+  providers: [MainPageApiService],
+  changeDetection: ChangeDetectionStrategy.OnPush
   //   styleUrl: './app.css'
 })
+// export class MainPage {
+//   auth = inject(AuthService);
+//   protected readonly environment = environment;
+
+//   post_add_data: PostAddData = new PostAddData();
+
+//   object_list = signal<PostWithImagesData[]>([]);
+//   current_user = signal<UserData | null>(null);
+//   serverErrors = signal<Record<string, string[]>>({});
+
+//   constructor(
+//     private router: Router, 
+//     private mainPageApiService: MainPageApiService, 
+//     private loginApiService: LoginApiService, 
+//     private authService: AuthService,
+//     private cdr: ChangeDetectorRef,
+//   ) {
+//     this.current_user = this.authService.currentUser();
+
+//     this.serverErrors = {};
+
+//     this.getPosts();
+//   }
+
+//   @ViewChildren(FormInputWithLabelComponent)
+//   inputs!: QueryList<FormInputWithLabelComponent>;
+
+//   getPosts() {
+//     this.mainPageApiService.getPosts().pipe(first()).subscribe(posts => {
+//       console.log(posts);
+//       this.object_list = posts;
+//       // this.cdr.detectChanges();
+//     });
+//   }
+
+//   savePost() {
+//     if (this.inputs.some(input => input.invalid)) {
+//         return;
+//     }
+
+//     const formData = new FormData();
+
+//     console.log(this.current_user);
+//     console.log(this.post_add_data);
+
+//     if (this.current_user == null) {
+//       return;
+//     }
+
+//     formData.append("authorId", this.current_user.id.toString());
+//     formData.append("text", this.post_add_data.text);
+
+//     if (this.post_add_data.image) {
+//         formData.append("image", this.post_add_data.image);
+//     }
+
+//     this.serverErrors = {};
+    
+//     this.mainPageApiService
+//       .savePost(formData)
+//       .pipe(first())
+//       .subscribe({
+//         next: () => {
+//           console.log("Пост сохранен");
+//           this.post_add_data = new PostAddData();
+
+//           this.getPosts();
+//           this.cdr.detectChanges();
+//         },
+//         error: (err) => {
+//           console.error(err);
+//           this.serverErrors = err.error.errors ?? {};
+//           console.log(this.serverErrors);
+          
+//           this.cdr.detectChanges();
+//         }
+//       });
+//       this.cdr.detectChanges();
+//     }
+    
+
+// }
+
 export class MainPage {
   auth = inject(AuthService);
   protected readonly environment = environment;
 
-  post_add_data: PostAddData = new PostAddData();
-  object_list: PostWithImagesData[] = [];
-  current_user: UserData | null = null;
-
-  serverErrors: Record<string, string[]> = {};
+  post_add_data = new PostAddData();
+  
+  // Используйте сигналы для реактивных данных
+  object_list = signal<PostWithImagesData[]>([]);
+  current_user = signal<UserData | null>(null);
+  serverErrors = signal<Record<string, string[]>>({});
 
   constructor(
     private router: Router, 
@@ -41,45 +126,41 @@ export class MainPage {
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
   ) {
-    this.current_user = this.authService.currentUser();
-
-    this.serverErrors = {};
-
+    this.current_user.set(this.authService.currentUser());
     this.getPosts();
+  }
+
+  getPosts() {
+    this.mainPageApiService.getPosts().pipe(first()).subscribe(posts => {
+      console.log(posts);
+      this.object_list.set(posts);
+      // this.cdr.detectChanges();
+    });
   }
 
   @ViewChildren(FormInputWithLabelComponent)
   inputs!: QueryList<FormInputWithLabelComponent>;
 
-  getPosts() {
-    this.mainPageApiService.getPosts().pipe(first()).subscribe(posts => {
-      console.log(posts);
-      this.object_list = posts;
-    });
-  }
-
   savePost() {
     if (this.inputs.some(input => input.invalid)) {
-        return;
-    }
-
-    const formData = new FormData();
-
-    console.log(this.current_user);
-    console.log(this.post_add_data);
-
-    if (this.current_user == null) {
       return;
     }
 
-    formData.append("authorId", this.current_user.id.toString());
+    const formData = new FormData();
+    const user = this.current_user();
+
+    if (!user) {
+      return;
+    }
+
+    formData.append("authorId", user.id.toString());
     formData.append("text", this.post_add_data.text);
 
     if (this.post_add_data.image) {
-        formData.append("image", this.post_add_data.image);
+      formData.append("image", this.post_add_data.image);
     }
 
-    this.serverErrors = {};
+    this.serverErrors.set({});
     
     this.mainPageApiService
       .savePost(formData)
@@ -88,18 +169,14 @@ export class MainPage {
         next: () => {
           console.log("Пост сохранен");
           this.post_add_data = new PostAddData();
-
           this.getPosts();
-          this.cdr.detectChanges();
         },
         error: (err) => {
           console.error(err);
-          this.serverErrors = err.error.errors ?? {};
-          console.log(this.serverErrors);
-          
-          this.cdr.detectChanges();
+          this.serverErrors.set(err.error.errors ?? {});
+          console.log(this.serverErrors());
+          // this.cdr.detectChanges();
         }
       });
   }
-
 }

@@ -26,12 +26,12 @@
               [submitted]="addPostForm.submitted"
               name="image"
               accept=".jpg, .jpeg, .png, .webp"
-              [serverErrors]="serverErrors['image'] ?? []"
+              [serverErrors]="serverErrors()['image'] ?? []"
               label="Прикрепить изображение">
             </form-file-input>
             <button type="submit" class="pl-6 pr-6 min-w-40">Добавить</button>
           </div>
-          @for (error of serverErrors[''] ?? []; track $index) {
+          @for (error of serverErrors()[''] ?? []; track $index) {
               <h5 class="text-error text-center">
                   {{ error }}
               </h5>
@@ -44,13 +44,14 @@
 
   <!-- <button (click)="getPosts()">Получить посты</button> -->
 
-  @for (item of object_list; track $index) {
+  @for (item of object_list(); track $index) {
     <form-modal class="max-w-200">
   
       <div form-header class="flex items-center gap-2">
         <div class="aspect-square h-[35px] rounded-[50px] overflow-hidden">
-          @if (!!current_user && current_user.avatarCode) {
-            <img class="h-full" [src]="environment.apiUrl + '/' + current_user.avatarCode">
+          @let user = current_user();
+          @if (!!user && user.avatarCode) {
+            <img class="h-full" [src]="environment.apiUrl + '/' + user.avatarCode">
           }
           @else {
             <img src="assets/images/default_avatar.jpg">
