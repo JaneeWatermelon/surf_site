@@ -1,6 +1,5 @@
 import { Observable, of } from "rxjs";
 import { UserData } from "../models/user_data";
-import { RegistrationData } from "../models/registration_data";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 

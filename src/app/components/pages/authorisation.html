@@ -14,7 +14,7 @@
             [maxLength]="31"
             [required]="true"
             [serverErrors]="serverErrors['loginOrEmail'] ?? []"
-            pattern="[a-zA-Zа-яА-Я0-9_]+"
+            pattern="[a-zA-Zа-яА-Я0-9_@.]+"
             patternErrorText="Латиница, кириллица, цифры и подчёркивания">
         </form-input-with-label>
 

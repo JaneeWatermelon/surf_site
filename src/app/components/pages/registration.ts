@@ -8,7 +8,6 @@ import { RegistrationData } from '../../models/registration_data';
 import { RegistrationApiService } from '../../services/registration-api-service';
 import { first } from 'rxjs';
 import { UserData } from '../../models/user_data';
-import { FormInputErrorsComponent } from '../include/form-input-errors';
 import { NgForm } from '@angular/forms';
 
 /**

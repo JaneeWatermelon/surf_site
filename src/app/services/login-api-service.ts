@@ -3,7 +3,6 @@ import { UserData } from "../models/user_data";
 import { LoginData } from "../models/login_data";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { UserByIdData } from "../models/user_by_id_data";
 
 @Injectable({
   providedIn: 'root'
