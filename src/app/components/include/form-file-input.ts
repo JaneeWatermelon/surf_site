@@ -1,19 +1,40 @@
-import { Component, effect, EventEmitter, Input, model, Output } from '@angular/core';
+import { Component, effect, EventEmitter, Input, model, Output, ViewChild } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared-imports';
+import { FormInputErrorsComponent } from './form-input-errors';
+import { NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'form-file-input',
-  imports: [...SHARED_IMPORTS],
+  imports: [...SHARED_IMPORTS, FormInputErrorsComponent],
   templateUrl: './form-file-input.html',
 })
 export class FormFileInputComponent {
   @Input() label = '';
+  @Input() accept = '';
+
+  @Input() name = '';
+
   // @Input() file?: File | null;
   file = model<File | null>(null);
 
   @Output() fileSelected = new EventEmitter<File | null>();
 
   selectedFileName = '';
+
+
+  // Переменные текущей компоненты
+  @ViewChild('inp')
+  inp?: NgModel;
+
+  @Input() serverErrors: string[] = [];
+  
+  @Input() form?: NgForm;
+  
+  @Input() submitted: boolean = false;
+
+  get showErrors(): boolean {
+    return !!this.inp?.errors && (this.submitted || !!this.inp?.touched);
+  }
 
   constructor() {
     effect(() => {

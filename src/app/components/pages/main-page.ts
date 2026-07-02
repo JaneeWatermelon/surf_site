@@ -99,6 +99,8 @@ export class MainPage {
     if (this.post_add_data.image) {
         formData.append("image", this.post_add_data.image);
     }
+
+    this.serverErrors = {};
     
     this.mainPageApiService
       .savePost(formData)

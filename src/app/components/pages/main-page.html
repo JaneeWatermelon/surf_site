@@ -17,8 +17,16 @@
     
         <div class="flex flex-col gap-2 items-end">
           <div class="flex justify-between items-end w-full">
+            <!-- <form-file-input
+              [(file)]="post_add_data.image"
+              label="Прикрепить изображение">
+            </form-file-input> -->
             <form-file-input
               [(file)]="post_add_data.image"
+              [submitted]="addPostForm.submitted"
+              name="image"
+              accept=".jpg, .jpeg, .png, .webp"
+              [serverErrors]="serverErrors['image'] ?? []"
               label="Прикрепить изображение">
             </form-file-input>
             <button type="submit" class="pl-6 pr-6 min-w-40">Добавить</button>

@@ -89,6 +89,10 @@
   
       <form-file-input
         [(file)]="registration_data.avatar"
+        [submitted]="registrationForm.submitted"
+        name="avatar"
+        accept=".jpg, .jpeg, .png, .webp"
+        [serverErrors]="serverErrors['avatar'] ?? []"
         (fileSelected)="onAvatarChanged($event)"
         label="Выберите фото">
       </form-file-input>
