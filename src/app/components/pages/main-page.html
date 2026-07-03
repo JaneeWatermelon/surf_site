@@ -64,7 +64,7 @@
       </div>
   
       <div form-content class="flex flex-col gap-2">
-        <p>{{item.post.text}}</p>
+        <p class="wrap-break-word">{{item.post.text}}</p>
         @for (image of item.images; track $index) {
           <img [src]="environment.apiUrl + '/' + image.code">
         }
