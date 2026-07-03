@@ -1,6 +1,7 @@
 import { Component, Input, model, signal, ViewChild } from '@angular/core';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { FormInputErrorsComponent } from './form-input-errors';
+import { FormMinLengthDirective } from '../../directives/form-min-length.directive';
 
 type LabelIcon = 'refresh' | 'eye-show' | 'eye-off' | null;
 type LeftIcon = 'email' | null;
@@ -9,7 +10,7 @@ type RightIcon = 'clear' | null;
 @Component({
   selector: 'form-input-with-label',
   templateUrl: './form-input-with-label.html',
-  imports: [FormsModule, FormInputErrorsComponent],
+  imports: [FormsModule, FormInputErrorsComponent, FormMinLengthDirective],
 })
 export class FormInputWithLabelComponent {
   

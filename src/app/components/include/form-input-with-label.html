@@ -38,6 +38,7 @@
                     [placeholder]="placeholder"
                     [required]="required"
                     [minLength]="minLength"
+                    [formMinLength]="minLength || 0"
                     [maxLength]="maxLength || 16"
                     [pattern]="pattern"
                     class="w-full">
@@ -52,6 +53,7 @@
                     [rows]="rows"
                     [required]="required"
                     [minLength]="minLength"
+                    [formMinLength]="minLength || 0"
                     [maxLength]="maxLength  || 16"
                     [placeholder]="placeholder"
                     class="w-full resize-none outline-none">

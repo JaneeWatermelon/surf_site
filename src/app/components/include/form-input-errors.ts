@@ -21,8 +21,8 @@ export class FormInputErrorsComponent {
   readonly errorMessages: Record<string, (value: any) => string> = {
     required: () => 'Поле является обязательным.',
     email: () => 'Введите корректный адрес электронной почты.',
-    minlength: (e) => `Минимальная длина — ${e.requiredLength} символов.`,
-    maxlength: (e) => `Максимальная длина — ${e.requiredLength} символов.`,
+    minlength: (e) => `Минимальная длина - ${e.requiredLength} символов.`,
+    maxlength: (e) => `Максимальная длина - ${e.requiredLength} символов.`,
     pattern: () => 'Поле заполнено некорректно.',
   };
 

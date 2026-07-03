@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, QueryList, signal, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, QueryList, signal, ViewChildren } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared-imports';
 import { FormModalComponent } from '../include/form-modal';
@@ -9,6 +9,7 @@ import { RegistrationApiService } from '../../services/registration-api-service'
 import { first } from 'rxjs';
 import { UserData } from '../../models/user_data';
 import { NgForm } from '@angular/forms';
+import { FormMinLengthDirective } from '../../directives/form-min-length.directive';
 
 /**
  * Главная страница
@@ -47,9 +48,10 @@ export class Registration {
     
     queueMicrotask(() => {
       console.log(this.registration_data);
-
-        if (this.inputs.some(input => input.invalid)) {
-            return;
+      
+      if (this.inputs.some(input => input.invalid)) {
+          console.log("some invalid");
+          return;
         }
 
         const formData = new FormData();
