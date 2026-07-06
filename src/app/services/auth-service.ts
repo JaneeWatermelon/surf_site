@@ -1,6 +1,8 @@
 import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { UserData } from '../models/user_data';
 import { isPlatformBrowser } from '@angular/common';
+import { LoginApiService } from './login-api-service';
+import { first } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,39 +10,52 @@ import { isPlatformBrowser } from '@angular/common';
 export class AuthService {
 
   private platformId = inject(PLATFORM_ID);
+  private tokenKey = 'accessToken';
 
   readonly currentUser = signal<UserData | null>(null);
 
-  constructor() {
+  constructor(
+    private loginApiService: LoginApiService,
+  ) {
     if (isPlatformBrowser(this.platformId)) {
       this.currentUser.set(this.loadUser());
     }
   }
 
-  login(user: UserData, remember: boolean) {
+  getToken(): string | null {
+    if (isPlatformBrowser(this.platformId)) {
+      return sessionStorage.getItem(this.tokenKey);
+    }
+    return null;
+  }
+
+  login(user: UserData, remember: boolean, access_token: string) {
       this.currentUser.set(user);
 
-      if (remember) {
-          localStorage.setItem("user", JSON.stringify(user));
+      if (remember && access_token) {
+        console.log("remember && access_token");
+        // localStorage.setItem("user", JSON.stringify(user));
+        sessionStorage.setItem("accessToken", access_token);
+        sessionStorage.setItem("user", JSON.stringify(user));
       } else {
-          sessionStorage.setItem("user", JSON.stringify(user));
+        console.log("not remember && access_token");
       }
   }
 
   logout() {
       this.currentUser.set(null);
-      localStorage.removeItem("user");
+      // localStorage.removeItem("user");
       sessionStorage.removeItem("user");
+      // localStorage.removeItem("accessToken");
+      sessionStorage.removeItem("accessToken");
   }
 
   isAuthenticated(): boolean {
-    return this.currentUser() !== null;
+    return this.currentUser() !== null && this.getToken() !== null;
   }
 
   private loadUser(): UserData | null {
-      const json =
-          localStorage.getItem("user") ??
-          sessionStorage.getItem("user");
+      const json = sessionStorage.getItem("user");
 
       return json ? JSON.parse(json) : null;
   }

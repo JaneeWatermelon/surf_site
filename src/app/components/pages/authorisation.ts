@@ -56,8 +56,10 @@ export class Authorisation {
         .login(this.login_data)
         .pipe(first())
         .subscribe({
-          next: user => {
-              this.authService.login(user, this.login_data.rememberMe);
+          next: data => {
+            var access_token = data.access_token;
+            var user = data.user;
+              this.authService.login(user, this.login_data.rememberMe, access_token);
               this.router.navigate(['']);
           },
           error: err => {

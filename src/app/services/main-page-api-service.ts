@@ -17,7 +17,13 @@ export class MainPageApiService {
     }
 
     savePost(data: FormData): Observable<PostData> {
-        return this.httpClient.post<PostData>("http://localhost:5283/api/Posts/Create", data);
+        var token = sessionStorage.getItem("accessToken");
+        return this.httpClient.post<PostData>("http://localhost:5283/api/Posts/Create", data, {
+            headers: {
+                "Accept": "application/json",
+                "Authorization": "Bearer " + token  // передача токена в заголовке
+            }
+        });
 
     }
 }

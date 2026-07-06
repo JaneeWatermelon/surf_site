@@ -3,6 +3,7 @@ import { UserData } from "../models/user_data";
 import { LoginData } from "../models/login_data";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { LoginOutData } from "../models/login_out_data";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class LoginApiService {
 
     }
 
-    login(data: LoginData): Observable<UserData> {
-        return this.httpClient.post<UserData>("http://localhost:5283/api/Users/Login", data);
+    login(data: LoginData): Observable<LoginOutData> {
+        return this.httpClient.post<LoginOutData>("http://localhost:5283/api/Users/Login", data);
 
     }
 
